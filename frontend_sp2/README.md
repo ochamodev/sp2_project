@@ -2,6 +2,12 @@
 
 FrontEnd SP2
 
+
+# Versions
+
+Flutter - [3.10.6]
+
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
