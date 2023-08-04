@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:frontend_sp2/core/navigation/app_router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frontend_sp2/core/di/injector.dart';
+import 'package:frontend_sp2/theming/app_colors.dart';
 import 'package:frontend_sp2/theming/dimens.dart';
 
 
@@ -32,6 +33,8 @@ class AppSp2 extends StatelessWidget {
       },
       theme: ThemeData(
         useMaterial3: false,
+        scaffoldBackgroundColor: AppColors.scaffoldBackgroundColor,
+        scrollbarTheme: AppColors.scrollbarTheme,
         textTheme: const TextTheme(
           headline1: TextStyle(
             fontSize: 96,
