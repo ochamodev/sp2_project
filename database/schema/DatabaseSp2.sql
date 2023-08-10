@@ -87,5 +87,3 @@ CREATE TABLE IF NOT EXISTS DTEDocument(
     FOREIGN KEY (idReceptor)
         REFERENCES DTEReceptor(idDteReceptor)
 );
-
-
