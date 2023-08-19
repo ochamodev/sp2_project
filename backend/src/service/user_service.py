@@ -29,7 +29,7 @@ class UserService(Resource):
 
 @api.route('/register')
 class RegisterService(Resource):
-    @api.doc('Registro')
+    @api.doc('Register user')
     @api.expect(registerUserModel)
     def post(self):
         print(api.payload)
