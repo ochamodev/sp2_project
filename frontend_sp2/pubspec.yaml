@@ -38,6 +38,8 @@ dependencies:
   #state management
   bloc: 8.0.3
   flutter_bloc: 8.0.1
+  equatable: ^2.0.0
+  formz: ^0.6.0
 
   #router
   auto_route: 7.7.1
@@ -77,6 +79,8 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+  assets:
+    - assets/anim/
 
   # To add assets to your application, add an assets section, like this:
   # assets:
