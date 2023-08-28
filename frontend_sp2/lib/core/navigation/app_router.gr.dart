@@ -15,25 +15,45 @@ abstract class _$AppRouter extends RootStackRouter {
 
   @override
   final Map<String, PageFactory> pagesMap = {
-    LoginRoute.name: (routeData) {
+    HomeRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const LoginScreen(),
+        child: const HomeScreen(),
       );
-    }
+    },
+    RegisterUserRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const RegisterUserScreen(),
+      );
+    },
   };
 }
 
 /// generated route for
-/// [LoginScreen]
-class LoginRoute extends PageRouteInfo<void> {
-  const LoginRoute({List<PageRouteInfo>? children})
+/// [HomeScreen]
+class HomeRoute extends PageRouteInfo<void> {
+  const HomeRoute({List<PageRouteInfo>? children})
       : super(
-          LoginRoute.name,
+          HomeRoute.name,
           initialChildren: children,
         );
 
-  static const String name = 'LoginRoute';
+  static const String name = 'HomeRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [RegisterUserScreen]
+class RegisterUserRoute extends PageRouteInfo<void> {
+  const RegisterUserRoute({List<PageRouteInfo>? children})
+      : super(
+          RegisterUserRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'RegisterUserRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }
