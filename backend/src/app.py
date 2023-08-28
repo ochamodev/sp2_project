@@ -1,5 +1,4 @@
-from setup import app
-
+from setup import create_application
 if __name__ == '__main__':
-    # container = DependencyContainer()
+    app = create_application()
     app.run(debug=True)

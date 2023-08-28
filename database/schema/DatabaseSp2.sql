@@ -37,6 +37,7 @@ CREATE TABLE IF NOT EXISTS PlatformUser(
     userName VARCHAR(255) NOT NULL,
     userLastName VARCHAR(255) NOT NULL,
     userEmail VARCHAR(255) NOT NULL,
+    userPassword VARCHAR(255) NOT NULL,
     PRIMARY KEY (idUser),
     FOREIGN KEY (nitEmitter)
         REFERENCES EmitterDTE(idEmitterDte)
