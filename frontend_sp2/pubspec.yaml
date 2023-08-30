@@ -56,6 +56,9 @@ dependencies:
   #json annotation
   json_annotation: 4.8.1
 
+  #charts
+  syncfusion_flutter_charts: ^22.2.11
+
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: 1.0.2
