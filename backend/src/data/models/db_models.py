@@ -1,17 +1,28 @@
 from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy()
 
+
+class ResponseCodes(db.Model):
+    __tablename__ = "ResponseCodes"
+    idResponse = db.Column(db.Integer, primary_key=True)
+    respCode = db.Column(db.String, unique=True)
+    respDescription = db.Column(db.String)
+
+
 class CertifierDte(db.Model):
     __tablename__ = "CertifierDTE"
     idNitCertifier = db.Column(db.Integer, primary_key=True)
     fullNameCertifier = db.Column(db.String)
     nitCertifier = db.Column(db.String(25), nullable=False)
 
+
 class DteDocumenTEstatus(db.Model):
     __tablename__ = "DteDocumentEstatus"
     idDteDocumentEstatus = db.Column(db.Integer, primary_key=True)
     descriptionEstatus = db.Column(db.String(255))
-    dte_documents = db.relationship('DTEDocument', backref="dteDocumentEstatus")
+    dte_documents = db.relationship(
+        'DTEDocument', backref="dteDocumentEstatus")
+
 
 class DTEReceptor(db.Model):
     __tablename__ = "DTEReceptor"
@@ -20,6 +31,7 @@ class DTEReceptor(db.Model):
     fullnameReceptor = db.Column(db.String(255), nullable=False)
     dte_documents = db.relationship('DTEDocument', backref="dteReceptor")
 
+
 class EmitterDTE(db.Model):
     __tablename__ = "EmitterDTE"
     idEmitterDte = db.Column(db.Integer, primary_key=True)
@@ -27,6 +39,7 @@ class EmitterDTE(db.Model):
     nameEmitter = db.Column(db.String(255), nullable=False)
     platformUsers = db.relationship('PlatformUser', backref='emitterDTE')
     establishments = db.relationship('Establishment', backref="emitterDTE")
+
 
 class Establishment(db.Model):
     __tablename__ = "Establishment"
@@ -38,6 +51,7 @@ class Establishment(db.Model):
         db.String(255), nullable=False
     )
     dte_documents = db.relationship("DTEDocument", backref="establishment")
+
 
 class PlatformUser(db.Model):
     __tablename__ = "PlatformUser"
