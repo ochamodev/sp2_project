@@ -6,6 +6,8 @@ from domain.dto.register_dto import RegisterDTO
 from domain.dto.login_dto import LoginDTO
 from domain.create_user_use_case import createUserUseCase
 from domain.check_if_user_exists_use_case import validate_login_use_case
+from domain.get_response_code_use_case import get_response_code_data
+from domain.response_codes import ResponseCodes
 
 
 api = Namespace('user', 'User operations')
@@ -34,10 +36,17 @@ class UserService(Resource):
         result = validate_login_use_case(logindto=logindto)
         if (result):
             access_token = create_access_token(identity=logindto.email)
-            response = BaseResponseDTO(data={'access_token': access_token}, success=True)
+            response = BaseResponseDTO(
+                data={'access_token': access_token}, success=True)
             return BaseResponseDTO.Schema().dump(response)
         else:
-            return jsonify({'exists': result})
+            return BaseResponseDTO.Schema().dump(
+                BaseResponseDTO(
+                    data=get_response_code_data(
+                        ResponseCodes.user_login_failed),
+                    success=False
+                )
+            )
 
 
 @api.route('/register')
@@ -47,8 +56,9 @@ class RegisterService(Resource):
     def post(self):
         print(api.payload)
         registerData = RegisterDTO.Schema().load(api.payload)
-        createUserUseCase(registerDTO=registerData)
-        return jsonify(RegisterDTO.Schema().dump(registerData))
+        response = createUserUseCase(registerDTO=registerData)
+        return BaseResponseDTO.Schema().dump(response)
+
 
 @api.route('/protected')
 class ProtectedResource(Resource):
