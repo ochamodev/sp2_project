@@ -1,3 +1,4 @@
+from datetime import timedelta
 from dotenv import load_dotenv
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
@@ -15,6 +16,8 @@ def create_application():
 
     # Setup the Flask-JWT-Extended extension
     app.config["JWT_SECRET_KEY"] = "super-secret"  # Change this!
+    app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(days=5)
+    app.config["JWT_REFRESH_TOKEN_EXPIRES"] = timedelta(days=30)
     jwt = JWTManager(app)
 
     # setup models

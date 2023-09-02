@@ -112,7 +112,7 @@ class _SubmitButton extends StatelessWidget {
     final mediaQuery = MediaQuery.of(context);
     return ElevatedButton(
         onPressed: () {
-
+          AutoRouter.of(context).navigate(MainMenuRoute(title: "Menu principal"));
         },
         style: ElevatedButton.styleFrom(
           shape: RoundedRectangleBorder(

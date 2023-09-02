@@ -1,10 +1,11 @@
 from flask import jsonify
 from flask_restx import Namespace, Resource, fields
-from flask_jwt_extended import jwt_required
+from flask_jwt_extended import jwt_required, create_access_token
+from domain.dto.base_response_dto import BaseResponseDTO
 from domain.dto.register_dto import RegisterDTO
 from domain.dto.login_dto import LoginDTO
-from domain.create_user_use_case import createUser
-from domain.check_if_user_exists_use_case import checkIfUserExists
+from domain.create_user_use_case import createUserUseCase
+from domain.check_if_user_exists_use_case import validate_login_use_case
 
 
 api = Namespace('user', 'User operations')
@@ -29,9 +30,14 @@ class UserService(Resource):
     @api.doc('Login')
     @api.expect(loginModel)
     def post(self):
-        logindto = LoginDTO.Schema().load(api.payload)
-        result = checkIfUserExists(logindto=logindto)
-        return jsonify({'exists': result})
+        logindto: LoginDTO = LoginDTO.Schema().load(api.payload)
+        result = validate_login_use_case(logindto=logindto)
+        if (result):
+            access_token = create_access_token(identity=logindto.email)
+            response = BaseResponseDTO(data={'access_token': access_token}, success=True)
+            return BaseResponseDTO.Schema().dump(response)
+        else:
+            return jsonify({'exists': result})
 
 
 @api.route('/register')
@@ -41,7 +47,7 @@ class RegisterService(Resource):
     def post(self):
         print(api.payload)
         registerData = RegisterDTO.Schema().load(api.payload)
-        createUser(registerDTO=registerData)
+        createUserUseCase(registerDTO=registerData)
         return jsonify(RegisterDTO.Schema().dump(registerData))
 
 @api.route('/protected')

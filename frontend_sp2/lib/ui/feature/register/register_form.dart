@@ -25,6 +25,10 @@ class RegisterForm extends StatelessWidget {
             const SizedBox(height: Dimens.rowSeparationRegister),
             _UserLastNameInput(),
             const SizedBox(height: Dimens.rowSeparationRegister),
+            _UserCompanyNit(),
+            const SizedBox(height: Dimens.rowSeparationRegister),
+            _UserCompanyName(),
+            const SizedBox(height: Dimens.rowSeparationRegister),
             _UserEmailInput(),
             const SizedBox(height: Dimens.rowSeparationRegister),
             _PasswordInput(),
@@ -105,6 +109,40 @@ class _UserLastNameInput extends StatelessWidget {
       },
       decoration: const InputDecoration(
           labelText: 'Apellidos',
+          border: OutlineInputBorder()
+      ),
+    );
+  }
+}
+
+class _UserCompanyNit extends StatelessWidget {
+  const _UserCompanyNit({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return TextField(
+      onChanged: (username) {
+
+      },
+      decoration: const InputDecoration(
+          labelText: 'Nit de la empresa',
+          border: OutlineInputBorder()
+      ),
+    );
+  }
+}
+
+class _UserCompanyName extends StatelessWidget {
+  const _UserCompanyName({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return TextField(
+      onChanged: (username) {
+
+      },
+      decoration: const InputDecoration(
+          labelText: 'Nombre de la empresa',
           border: OutlineInputBorder()
       ),
     );
