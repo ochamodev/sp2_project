@@ -22,7 +22,8 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
     MainMenuRoute.name: (routeData) {
-      final args = routeData.argsAs<MainMenuRouteArgs>();
+      final args = routeData.argsAs<MainMenuRouteArgs>(
+          orElse: () => const MainMenuRouteArgs());
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: MainMenuScreen(
@@ -59,7 +60,7 @@ class HomeRoute extends PageRouteInfo<void> {
 class MainMenuRoute extends PageRouteInfo<MainMenuRouteArgs> {
   MainMenuRoute({
     Key? key,
-    required String title,
+    String title = "Menu principal",
     List<PageRouteInfo>? children,
   }) : super(
           MainMenuRoute.name,
@@ -79,7 +80,7 @@ class MainMenuRoute extends PageRouteInfo<MainMenuRouteArgs> {
 class MainMenuRouteArgs {
   const MainMenuRouteArgs({
     this.key,
-    required this.title,
+    this.title = "Menu principal",
   });
 
   final Key? key;

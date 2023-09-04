@@ -1,0 +1,52 @@
+
+import 'package:bloc/bloc.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:formz/formz.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:frontend_sp2/core/inputs/text_field_input.dart';
+import 'package:frontend_sp2/core/inputs/email_input.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+part 'login_cubit.freezed.dart';
+
+class LoginCubit extends Cubit<LoginState> {
+  LoginCubit(SharedPreferences sharedPreferences) : super(_Initial());
+
+  void onEmailChanged(String value) {
+    final email = EmailInput.dirty(value);
+    emit(state.copyWith(
+      email: email,
+      formIsValid: Formz.validate([email, state.password])
+    ));
+  }
+
+  void onPasswordChanged(String value) {
+    final password = TextFieldInput.dirty(value: value);
+    emit(state.copyWith(
+        password: password,
+        formIsValid: Formz.validate([state.email, password])
+    ));
+  }
+
+  void submitForm() {
+    emit(
+      state.copyWith(
+        status: FormzSubmissionStatus.inProgress,
+      )
+    );
+    final email = state.email.value;
+    final password = state.password.value;
+
+  }
+
+}
+
+@freezed
+abstract class LoginState with _$LoginState {
+  factory LoginState.initial({
+    @Default(EmailInput.pure()) EmailInput email,
+    @Default(TextFieldInput.pure()) TextFieldInput password,
+    @Default(false) bool formIsValid,
+    @Default(FormzSubmissionStatus.initial) FormzSubmissionStatus status,
+  }) = _Initial;
+}
