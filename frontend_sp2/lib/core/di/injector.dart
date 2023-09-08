@@ -1,6 +1,9 @@
 
 import 'package:dio/dio.dart';
 import 'package:frontend_sp2/core/navigation/app_router.dart';
+import 'package:frontend_sp2/data/base_api_caller.dart';
+import 'package:frontend_sp2/domain/login_use_case.dart';
+import 'package:frontend_sp2/domain/register_user_use_case.dart';
 import 'package:frontend_sp2/ui/feature/login/state/login_cubit.dart';
 import 'package:get_it/get_it.dart';
 import 'package:logger/logger.dart';
@@ -15,9 +18,15 @@ Future<void> initializeInjectedDependencies() async {
   getIt.registerSingleton(setupDio());
   getIt.registerSingleton(await SharedPreferences.getInstance());
 
-  // blocs factories
-  getIt.registerFactory(() => LoginCubit(getIt()));
+  // api callers
+  getIt.registerSingleton(BaseApiCaller(dio: getIt(), logger: getIt()));
 
+  // use cases
+  getIt.registerSingleton(LoginUseCase(getIt()));
+  getIt.registerSingleton(RegisterUserUseCase(getIt()));
+
+  // blocs factories
+  getIt.registerFactory(() => LoginCubit(getIt(), getIt()));
 
 }
 

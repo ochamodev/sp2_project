@@ -1,10 +1,11 @@
 
+import 'package:frontend_sp2/data/model/base_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'register_user_request.g.dart';
 
 @JsonSerializable()
-class RegisterUserRequest {
+class RegisterUserRequest extends BaseModel {
   @JsonKey(name: "userEmail")
   final String userEmail;
   @JsonKey(name: "password")
@@ -30,5 +31,6 @@ class RegisterUserRequest {
   factory RegisterUserRequest.fromJson(Map<String, dynamic> json) =>
       _$RegisterUserRequestFromJson(json);
 
+  @override
   Map<String, dynamic> toJson() => _$RegisterUserRequestToJson(this);
 }

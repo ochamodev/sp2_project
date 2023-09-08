@@ -4,9 +4,7 @@ import 'package:flutter/material.dart';
 
 @RoutePage()
 class MainMenuScreen extends StatefulWidget {
-  const MainMenuScreen({Key? key, this.title = "Menu principal"}) : super(key: key);
-
-  final String title;
+  const MainMenuScreen({Key? key}) : super(key: key);
 
   @override
   _MyMenuPageState createState() => _MyMenuPageState();
@@ -28,7 +26,7 @@ class _MyMenuPageState extends State<MainMenuScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: const Text("Menu principal"),
         centerTitle: true,
       ),
       body: Row(

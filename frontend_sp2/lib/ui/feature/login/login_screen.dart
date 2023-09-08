@@ -1,7 +1,10 @@
 
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:formz/formz.dart';
 import 'package:frontend_sp2/core/di/injector.dart';
+import 'package:frontend_sp2/core/navigation/app_router.dart';
 import 'package:frontend_sp2/ui/feature/login/login_form.dart';
 import 'package:frontend_sp2/ui/feature/login/state/login_cubit.dart';
 
@@ -22,7 +25,15 @@ class LoginScreen extends StatelessWidget {
           );
         },
         listener: (context, state) {
-
+          switch (state.loginStatus) {
+            case LoginFormStatus.authenticated:
+              AutoRouter.of(context).replace(const MainMenuRoute());
+              break;
+            case LoginFormStatus.error:
+              break;
+            default:
+              break;
+          }
         },
       )
     );

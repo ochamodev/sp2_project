@@ -21,21 +21,16 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const HomeScreen(),
       );
     },
-    MainMenuRoute.name: (routeData) {
-      final args = routeData.argsAs<MainMenuRouteArgs>(
-          orElse: () => const MainMenuRouteArgs());
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: MainMenuScreen(
-          key: args.key,
-          title: args.title,
-        ),
-      );
-    },
     RegisterUserRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const RegisterUserScreen(),
+      );
+    },
+    MainMenuRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const MainMenuScreen(),
       );
     },
   };
@@ -56,44 +51,6 @@ class HomeRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [MainMenuScreen]
-class MainMenuRoute extends PageRouteInfo<MainMenuRouteArgs> {
-  MainMenuRoute({
-    Key? key,
-    String title = "Menu principal",
-    List<PageRouteInfo>? children,
-  }) : super(
-          MainMenuRoute.name,
-          args: MainMenuRouteArgs(
-            key: key,
-            title: title,
-          ),
-          initialChildren: children,
-        );
-
-  static const String name = 'MainMenuRoute';
-
-  static const PageInfo<MainMenuRouteArgs> page =
-      PageInfo<MainMenuRouteArgs>(name);
-}
-
-class MainMenuRouteArgs {
-  const MainMenuRouteArgs({
-    this.key,
-    this.title = "Menu principal",
-  });
-
-  final Key? key;
-
-  final String title;
-
-  @override
-  String toString() {
-    return 'MainMenuRouteArgs{key: $key, title: $title}';
-  }
-}
-
-/// generated route for
 /// [RegisterUserScreen]
 class RegisterUserRoute extends PageRouteInfo<void> {
   const RegisterUserRoute({List<PageRouteInfo>? children})
@@ -103,6 +60,20 @@ class RegisterUserRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'RegisterUserRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [MainMenuScreen]
+class MainMenuRoute extends PageRouteInfo<void> {
+  const MainMenuRoute({List<PageRouteInfo>? children})
+      : super(
+          MainMenuRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'MainMenuRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }
