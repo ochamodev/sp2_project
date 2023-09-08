@@ -9,10 +9,9 @@ from flask_jwt_extended import JWTManager
 # https://pypi.org/project/Flask-SQLAlchemy/
 
 
-
 def create_application():
     app = Flask(__name__)
-    app.config["SQLALCHEMY_DATABASE_URI"] = "mysql+mysqlconnector://root:root@localhost:3306/proyectosp2"
+    app.config["SQLALCHEMY_DATABASE_URI"] = "mysql+mysqlconnector://root:rootpassword@localhost:3306/proyectosp2"
 
     # Setup the Flask-JWT-Extended extension
     app.config["JWT_SECRET_KEY"] = "super-secret"  # Change this!
@@ -28,7 +27,7 @@ def create_application():
 
     apiSp2.init_app(app)
 
+    from flask_cors import CORS
+    CORS(app)
 
     return app
-
-
