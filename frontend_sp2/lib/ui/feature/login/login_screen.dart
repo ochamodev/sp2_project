@@ -2,7 +2,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:formz/formz.dart';
 import 'package:frontend_sp2/core/di/injector.dart';
 import 'package:frontend_sp2/core/navigation/app_router.dart';
 import 'package:frontend_sp2/ui/feature/login/login_form.dart';
@@ -26,11 +25,14 @@ class LoginScreen extends StatelessWidget {
         },
         listener: (context, state) {
           switch (state.loginStatus) {
-            case LoginFormStatus.authenticated:
+            case LoginStatusResult.success:
               AutoRouter.of(context).replace(const MainMenuRoute());
               break;
-            case LoginFormStatus.error:
-              break;
+            case LoginStatusResult.error:
+              showResultDialog(context, state.message, () {
+                AutoRouter.of(context).pop();
+                context.read<LoginCubit>().resetForm();
+              });
             default:
               break;
           }
@@ -38,4 +40,35 @@ class LoginScreen extends StatelessWidget {
       )
     );
   }
+
+  Future<void> showResultDialog(
+      BuildContext context,
+      String message,
+      Function() result) async {
+    return showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text("Mensaje"),
+          content: SizedBox(
+            height: MediaQuery.of(context).size.height * 0.03,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(message)
+              ],
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: result,
+              child: const Text("Ok"),
+            )
+          ],
+        );
+      }
+    );
+  }
+
 }

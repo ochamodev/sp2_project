@@ -2,12 +2,14 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
+import 'package:frontend_sp2/core/di/injector.dart';
 import 'package:frontend_sp2/core/inputs/text_field_input.dart';
 import 'package:frontend_sp2/core/inputs/email_input.dart';
 import 'package:frontend_sp2/core/navigation/app_router.dart';
 import 'package:frontend_sp2/core/theming/app_colors.dart';
 import 'package:frontend_sp2/core/theming/dimens.dart';
 import 'package:frontend_sp2/ui/feature/login/state/login_cubit.dart';
+import 'package:logger/logger.dart';
 
 class LoginForm extends StatelessWidget {
   const LoginForm({super.key});
@@ -53,6 +55,7 @@ class _UserEmailInput extends StatelessWidget {
       },
       builder: (context, state) {
         return TextFormField(
+          controller: context.read<LoginCubit>().userEmailCtrl,
           onChanged: (value) => context.read<LoginCubit>().onEmailChanged(value),
           decoration: InputDecoration(
               labelText: 'Correo',
@@ -76,6 +79,7 @@ class _UserPasswordInput extends StatelessWidget {
       },
       builder: (context, state) {
         return TextField(
+          controller: context.read<LoginCubit>().userPasswordCtrl,
           onChanged: (password) => context
               .read<LoginCubit>().onPasswordChanged(password),
           obscureText: true,
@@ -129,7 +133,14 @@ class _SubmitButton extends StatelessWidget {
     final mediaQuery = MediaQuery.of(context);
     return BlocBuilder<LoginCubit, LoginState>(
       buildWhen: (previousState, currentState) {
-        return previousState.formIsValid != currentState.formIsValid;
+        getIt<Logger>().d("Status buildWhen ${currentState}");
+        if (previousState.formIsValid != currentState.formIsValid) {
+          return true;
+        }
+        if (currentState.status.isInProgress) {
+          return true;
+        }
+        return false;
       },
       builder: (context, state) {
         if (state.status.isInProgress) {

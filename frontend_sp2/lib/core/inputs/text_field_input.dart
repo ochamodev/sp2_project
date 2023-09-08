@@ -9,11 +9,7 @@ class TextFieldInput extends FormzInput<String, TextFieldInputError> {
 
   @override
   TextFieldInputError? validator(String value) {
-    if (isPure) {
-      return null;
-    } else {
       return value.isNotEmpty ? null : TextFieldInputError.empty;
-    }
   }
 }
 

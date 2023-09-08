@@ -1,5 +1,5 @@
 
-import 'package:frontend_sp2/data/model/base_model.dart';
+import 'package:frontend_sp2/data/base_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'login_request.g.dart';

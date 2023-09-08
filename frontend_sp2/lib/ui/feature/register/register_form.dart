@@ -1,8 +1,15 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:formz/formz.dart';
+import 'package:frontend_sp2/core/di/injector.dart';
 import 'package:frontend_sp2/core/navigation/app_router.dart';
 import 'package:frontend_sp2/core/theming/app_colors.dart';
 import 'package:frontend_sp2/core/theming/dimens.dart';
+import 'package:frontend_sp2/core/inputs/text_field_input.dart';
+import 'package:frontend_sp2/core/inputs/email_input.dart';
+import 'package:frontend_sp2/ui/feature/register/state/register_user_cubit.dart';
+import 'package:logger/logger.dart';
 
 class RegisterForm extends StatelessWidget {
   const RegisterForm({super.key});
@@ -21,17 +28,17 @@ class RegisterForm extends StatelessWidget {
               style: Theme.of(context).textTheme.headline3,
             ),
             const SizedBox(height: Dimens.rowSeparationRegister),
-            _UserNameInput(),
+            const _UserNameInput(),
             const SizedBox(height: Dimens.rowSeparationRegister),
-            _UserLastNameInput(),
+            const _UserLastNameInput(),
             const SizedBox(height: Dimens.rowSeparationRegister),
-            _UserCompanyNit(),
+            const _UserCompanyNit(),
             const SizedBox(height: Dimens.rowSeparationRegister),
-            _UserCompanyName(),
+            const _UserCompanyName(),
             const SizedBox(height: Dimens.rowSeparationRegister),
-            _UserEmailInput(),
+            const _UserEmailInput(),
             const SizedBox(height: Dimens.rowSeparationRegister),
-            _PasswordInput(),
+            const _PasswordInput(),
             const SizedBox(height: Dimens.rowSeparationRegister),
             const Align(
               alignment: Alignment.centerRight,
@@ -51,14 +58,23 @@ class _UserEmailInput extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
-      onChanged: (username) {
-
+    return BlocBuilder<RegisterUserCubit, RegisterUserFormState>(
+      buildWhen: (p, c) {
+        return p.email != c.email;
       },
-      decoration: const InputDecoration(
-          labelText: 'Correo',
-          border: OutlineInputBorder()
-      ),
+      builder: (context, state) {
+        return TextField(
+          controller: context.read<RegisterUserCubit>().userEmailCtrl,
+          onChanged: (value) => context
+              .read<RegisterUserCubit>()
+              .onEmailChanged(value),
+          decoration: InputDecoration(
+              labelText: 'Correo',
+              border: const OutlineInputBorder(),
+              errorText: state.email.error?.text()
+          ),
+        );
+      },
     );
   }
 }
@@ -68,15 +84,19 @@ class _PasswordInput extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
-      onChanged: (username) {
-
+    return BlocBuilder<RegisterUserCubit, RegisterUserFormState>(
+      builder: (context, state) {
+        return TextField(
+          controller: context.read<RegisterUserCubit>().userPasswordCtrl,
+          onChanged: (value) => context.read<RegisterUserCubit>().onPasswordChanged(value),
+          decoration: InputDecoration(
+              labelText: 'Contraseña',
+              border: const OutlineInputBorder(),
+              errorText: state.password.error?.text()
+          ),
+          obscureText: true,
+        );
       },
-      decoration: const InputDecoration(
-          labelText: 'Contraseña',
-          border: OutlineInputBorder()
-      ),
-      obscureText: true,
     );
   }
 }
@@ -86,14 +106,18 @@ class _UserNameInput extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
-      onChanged: (username) {
-
+    return BlocBuilder<RegisterUserCubit, RegisterUserFormState>(
+      builder: (context, state) {
+        return TextField(
+          controller: context.read<RegisterUserCubit>().userNameCtrl,
+          onChanged: (value) => context.read<RegisterUserCubit>().onNameChanged(value),
+          decoration: InputDecoration(
+              labelText: 'Nombre',
+              border: const OutlineInputBorder(),
+              errorText: state.nameInput.error?.text()
+          ),
+        );
       },
-      decoration: const InputDecoration(
-          labelText: 'Nombre',
-          border: OutlineInputBorder()
-      ),
     );
   }
 }
@@ -103,14 +127,18 @@ class _UserLastNameInput extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
-      onChanged: (username) {
-
+    return BlocBuilder<RegisterUserCubit, RegisterUserFormState>(
+      builder: (context, state) {
+        return TextField(
+          controller: context.read<RegisterUserCubit>().userLastNameCtrl,
+          onChanged: (value) => context.read<RegisterUserCubit>().onLastNameChanged(value),
+          decoration: InputDecoration(
+              labelText: 'Apellidos',
+              border: const OutlineInputBorder(),
+              errorText: state.lastNameInput.error?.text()
+          ),
+        );
       },
-      decoration: const InputDecoration(
-          labelText: 'Apellidos',
-          border: OutlineInputBorder()
-      ),
     );
   }
 }
@@ -120,14 +148,18 @@ class _UserCompanyNit extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
-      onChanged: (username) {
-
+    return BlocBuilder<RegisterUserCubit, RegisterUserFormState>(
+      builder: (context, state) {
+        return TextField(
+          controller: context.read<RegisterUserCubit>().userCompanyNitCtrl,
+          onChanged: (value) => context.read<RegisterUserCubit>().onNitInputChanged(value),
+          decoration: InputDecoration(
+              labelText: 'Nit de la empresa',
+              border: const OutlineInputBorder(),
+              errorText: state.nitInput.error?.text()
+          ),
+        );
       },
-      decoration: const InputDecoration(
-          labelText: 'Nit de la empresa',
-          border: OutlineInputBorder()
-      ),
     );
   }
 }
@@ -137,14 +169,18 @@ class _UserCompanyName extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
-      onChanged: (username) {
-
+    return BlocBuilder<RegisterUserCubit, RegisterUserFormState>(
+      builder: (context, state) {
+        return TextField(
+          controller: context.read<RegisterUserCubit>().userCompanyNameCtrl,
+          onChanged: (value) => context.read<RegisterUserCubit>().onCompanyNameChanged(value),
+          decoration: InputDecoration(
+              labelText: 'Nombre de la empresa',
+              border: const OutlineInputBorder(),
+              errorText: state.companyNameInput.error?.text()
+          ),
+        );
       },
-      decoration: const InputDecoration(
-          labelText: 'Nombre de la empresa',
-          border: OutlineInputBorder()
-      ),
     );
   }
 }
@@ -185,18 +221,38 @@ class _SubmitButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final mediaQuery = MediaQuery.of(context);
-    return ElevatedButton(
-        onPressed: () {
-
-        },
-        style: ElevatedButton.styleFrom(
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(50)
-            ),
-            fixedSize: Size(mediaQuery.size.width, 50),
-            backgroundColor: AppColors.defaultRedColor
-        ),
-        child: const Text("Registrarme")
+    return BlocBuilder<RegisterUserCubit, RegisterUserFormState>(
+      buildWhen: (p, c) {
+        getIt<Logger>().d("Status buildWhen ${c}");
+        if (p.formIsValid != c.formIsValid) {
+          return true;
+        }
+        if (c.status.isInProgress) {
+          return true;
+        }
+        return false;
+      },
+      builder: (context, state) {
+        if (state.status.isInProgress) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        } else {
+          return ElevatedButton(
+              onPressed: state.formIsValid && state.password.value.isNotEmpty ? () {
+                context.read<RegisterUserCubit>().submitForm();
+              } : null,
+              style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(50)
+                  ),
+                  fixedSize: Size(mediaQuery.size.width, 50),
+                  backgroundColor: AppColors.defaultRedColor
+              ),
+              child: const Text("Registrarme")
+          );
+        }
+      },
     );
   }
 }

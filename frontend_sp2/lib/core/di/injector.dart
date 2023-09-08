@@ -5,6 +5,7 @@ import 'package:frontend_sp2/data/base_api_caller.dart';
 import 'package:frontend_sp2/domain/login_use_case.dart';
 import 'package:frontend_sp2/domain/register_user_use_case.dart';
 import 'package:frontend_sp2/ui/feature/login/state/login_cubit.dart';
+import 'package:frontend_sp2/ui/feature/register/state/register_user_cubit.dart';
 import 'package:get_it/get_it.dart';
 import 'package:logger/logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -27,12 +28,13 @@ Future<void> initializeInjectedDependencies() async {
 
   // blocs factories
   getIt.registerFactory(() => LoginCubit(getIt(), getIt()));
+  getIt.registerFactory(() => RegisterUserCubit(getIt()));
 
 }
 
 Dio setupDio() {
   final dio = Dio();
-  dio.options.baseUrl = '127.0.0.1:5000/';
+  dio.options.baseUrl = 'http://127.0.0.1:5000';
   dio.options.connectTimeout = const Duration(seconds: 5);
   dio.options.receiveTimeout = const Duration(seconds: 5);
   return dio;
