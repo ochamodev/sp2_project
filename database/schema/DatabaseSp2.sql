@@ -37,6 +37,7 @@ CREATE TABLE IF NOT EXISTS PlatformUser(
     userName VARCHAR(255) NOT NULL,
     userLastName VARCHAR(255) NOT NULL,
     userEmail VARCHAR(255) NOT NULL,
+    userPassword VARCHAR(255) NOT NULL,
     PRIMARY KEY (idUser),
     FOREIGN KEY (nitEmitter)
         REFERENCES EmitterDTE(idEmitterDte)
@@ -87,3 +88,11 @@ CREATE TABLE IF NOT EXISTS DTEDocument(
     FOREIGN KEY (idReceptor)
         REFERENCES DTEReceptor(idDteReceptor)
 );
+
+CREATE TABLE IF NOT EXISTS ResponseCodes(
+    idResponse INT NOT NULL AUTO_INCREMENT,
+    respCode VARCHAR(255) NOT NULL,
+    respDescription VARCHAR(255) NOT NULL,
+    PRIMARY KEY (idResponse),
+    UNIQUE(respDescription)
+)

@@ -7,3 +7,6 @@
 
 ## Sobre el proyecto
 
+### Estrategia de branching
+
+![Estratetia de branching](./documentation/branchingFlow.jpeg)

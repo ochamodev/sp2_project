@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:frontend_sp2/core/navigation/app_router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frontend_sp2/core/di/injector.dart';
-import 'package:frontend_sp2/theming/app_colors.dart';
-import 'package:frontend_sp2/theming/dimens.dart';
+import 'package:frontend_sp2/core/theming/app_colors.dart';
+import 'package:frontend_sp2/core/theming/dimens.dart';
 
 
 
