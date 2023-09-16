@@ -19,4 +19,3 @@ INSERT INTO responseCodes(respCode, respDescription)
 INSERT INTO responseCodes(respCode, respDescription)
 	VALUES('E0','Ya se registro la empresa con ese NIT');
     
-    

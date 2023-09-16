@@ -22,6 +22,7 @@ class AppSp2 extends StatelessWidget {
     return MaterialApp.router(
       routerConfig: appRouter.config(),
       title: "SP2 Proyecto",
+      debugShowCheckedModeBanner: false,
       builder: (context, child) {
         final MediaQueryData mediaQueryData = MediaQuery.of(context);
         return MediaQuery(
