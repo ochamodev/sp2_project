@@ -45,12 +45,13 @@ CREATE TABLE IF NOT EXISTS PlatformUser(
 
 CREATE TABLE IF NOT EXISTS Establishment(
     idEstablishment INT AUTO_INCREMENT,
+    establishmentCode INT NOT NULL,
     nitEmitter INT NOT NULL,
     nameEmitter VARCHAR(255) NOT NULL,
     PRIMARY KEY (idEstablishment),
     FOREIGN KEY (nitEmitter)
         REFERENCES EmitterDTE(idEmitterDte),
-    UNIQUE (nitEmitter, nameEmitter)
+    UNIQUE (nitEmitter, nameEmitter, establishmentCode)
 );
 
 CREATE TABLE IF NOT EXISTS DTEDocument(
@@ -71,7 +72,6 @@ CREATE TABLE IF NOT EXISTS DTEDocument(
     tourismPasajeTax DECIMAL(13, 4) NOT NULL,
     timbreDePrensaTax DECIMAL(13, 4) NOT NULL,
     firefightersTax DECIMAL(13, 4) NOT NULL,
-    municipalTax DECIMAL(13, 4) NOT NULL,
     municipalFeeTax DECIMAL(13, 4) NOT NULL,
     alcoholicDrinksTax DECIMAL(13, 4) NOT NULL,
     tabaccoTax DECIMAL(13, 4) NOT NULL,
@@ -94,5 +94,5 @@ CREATE TABLE IF NOT EXISTS ResponseCodes(
     respCode VARCHAR(255) NOT NULL,
     respDescription VARCHAR(255) NOT NULL,
     PRIMARY KEY (idResponse),
-    UNIQUE(respDescription)
+    UNIQUE(respCode)
 )
