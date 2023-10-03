@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_sidemenu/easy_sidemenu.dart';
 import 'package:flutter/material.dart';
+import 'package:frontend_sp2/ui/feature/menu/file_upload/file_upload_screen.dart';
 
 @RoutePage()
 class MainMenuScreen extends StatefulWidget {
@@ -82,16 +83,11 @@ class _MyMenuPageState extends State<MainMenuScreen> {
             ),
             items: [
               SideMenuItem(
-                title: 'Subir archivos',
+                title: 'File Upload',
                 onTap: (index, _) {
                   sideMenu.changePage(index);
                 },
-                icon: const Icon(Icons.home),
-                badgeContent: const Text(
-                  '3',
-                  style: TextStyle(color: Colors.white),
-                ),
-                tooltipContent: "This is a tooltip for Dashboard item",
+                icon: const Icon(Icons.upload_file),
               ),
               SideMenuItem(
                 title: 'reporte 1',
@@ -163,15 +159,7 @@ class _MyMenuPageState extends State<MainMenuScreen> {
             child: PageView(
               controller: pageController,
               children: [
-                Container(
-                  color: Colors.white,
-                  child: const Center(
-                    child: Text(
-                      'subir archivos',
-                      style: TextStyle(fontSize: 35),
-                    ),
-                  ),
-                ),
+                FileUploadScreen(),
                 Container(
                   color: Colors.white,
                   child: const Center(
