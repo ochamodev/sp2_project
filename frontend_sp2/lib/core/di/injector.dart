@@ -15,9 +15,9 @@ final getIt = GetIt.instance;
 Future<void> initializeInjectedDependencies() async {
 
   getIt.registerLazySingleton(() => Logger());
+  getIt.registerSingleton(await SharedPreferences.getInstance());
   getIt.registerSingleton(AppRouter());
   getIt.registerSingleton(setupDio());
-  getIt.registerSingleton(await SharedPreferences.getInstance());
 
   // api callers
   getIt.registerSingleton(BaseApiCaller(dio: getIt(), logger: getIt()));
@@ -37,5 +37,20 @@ Dio setupDio() {
   dio.options.baseUrl = 'http://127.0.0.1:5000';
   dio.options.connectTimeout = const Duration(seconds: 5);
   dio.options.receiveTimeout = const Duration(seconds: 5);
+
+  dio.interceptors.add(InterceptorsWrapper(
+    onRequest: (RequestOptions options, RequestInterceptorHandler handler) async {
+      if (options.path != '/user/login' && options.path != '/user/register') {
+        var sharedPrefs = getIt<SharedPreferences>();
+        String accessToken = sharedPrefs.getString('at') ?? "";
+
+        options.headers['Authorization'] = 'Bearer $accessToken';
+      }
+
+      // Proceed with the request
+      handler.next(options);
+    },
+  ));
+
   return dio;
 }

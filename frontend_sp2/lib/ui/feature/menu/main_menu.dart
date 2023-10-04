@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:easy_sidemenu/easy_sidemenu.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend_sp2/ui/feature/menu/file_upload/file_upload_screen.dart';
+import 'package:frontend_sp2/ui/feature/menu/sales_performance/sales_performance_screen.dart';
 
 @RoutePage()
 class MainMenuScreen extends StatefulWidget {
@@ -83,14 +84,14 @@ class _MyMenuPageState extends State<MainMenuScreen> {
             ),
             items: [
               SideMenuItem(
-                title: 'File Upload',
+                title: 'Subir archivos',
                 onTap: (index, _) {
                   sideMenu.changePage(index);
                 },
                 icon: const Icon(Icons.upload_file),
               ),
               SideMenuItem(
-                title: 'reporte 1',
+                title: 'Sales performance',
                 onTap: (index, _) {
                   sideMenu.changePage(index);
                 },
@@ -147,7 +148,7 @@ class _MyMenuPageState extends State<MainMenuScreen> {
               //   title: 'Only Title',
               //   onTap:(index, _){
               //     sideMenu.changePage(index);
-              //   },
+              //   },.
               // ),
               const SideMenuItem(
                 title: 'Exit',
@@ -160,15 +161,7 @@ class _MyMenuPageState extends State<MainMenuScreen> {
               controller: pageController,
               children: [
                 FileUploadScreen(),
-                Container(
-                  color: Colors.white,
-                  child: const Center(
-                    child: Text(
-                      'reporte 1',
-                      style: TextStyle(fontSize: 35),
-                    ),
-                  ),
-                ),
+                SalesPerformanceScreen(),
                 Container(
                   color: Colors.white,
                   child: const Center(
