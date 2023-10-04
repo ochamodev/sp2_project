@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_dropzone/flutter_dropzone.dart';
 import 'package:frontend_sp2/core/theming/img_paths.dart';
-import 'package:flutter/foundation.dart';
 
 class FileUploadScreen extends StatelessWidget {
   @override
@@ -60,7 +59,7 @@ class _UploadFileContainer extends StatelessWidget {
     var media = MediaQuery.of(context);
     return GestureDetector(
       onTap: () async {
-        FilePickerResult? result = await FilePicker.platform.pickFiles();
+        FilePickerResult? result = await FilePicker.platform.pickFiles(allowedExtensions: ['.xlsx']);
       },
       child: DottedBorder(
           dashPattern: const [6, 3, 2, 3],
