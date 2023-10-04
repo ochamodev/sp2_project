@@ -1,7 +1,7 @@
 from flask_restx import Api
 from service.user_service import api as userNamespace
 from service.file_upload_service import api as fileUploadNameSpace
-
+from service.reports import api as reportsNameSpace
 authorizations = {
     'jwt': {
         'type': 'apiKey',
@@ -18,3 +18,4 @@ apiSp2 = Api(
 
 apiSp2.add_namespace(userNamespace)
 apiSp2.add_namespace(fileUploadNameSpace)
+apiSp2.add_namespace(reportsNameSpace)

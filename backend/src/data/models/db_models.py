@@ -17,7 +17,6 @@ class CertifierDte(db.Model):
     dte_documents = db.relationship("DTEDocument", backref="certifierData")
 
 
-
 class DteDocumentEstatus(db.Model):
     __tablename__ = "DteDocumentEstatus"
     idDteDocumentEstatus = db.Column(db.Integer, primary_key=True)
@@ -85,7 +84,7 @@ class DTEDocument(db.Model):
     )
     authNumber = db.Column(db.String)
     seriesNumber = db.Column(db.String)
-    emissionDate = db.Column(db.DateTime)
+    emissionDate = db.Column(db.Date)
     cancellationDate = db.Column(db.DateTime)
     isMarkedCancelled = db.Column(db.Integer, nullable=False)
     amountGrandTotal = db.Column(db.DECIMAL, nullable=False)
@@ -101,4 +100,3 @@ class DTEDocument(db.Model):
     cementTax = db.Column(db.DECIMAL, nullable=False)
     noAlcoholicDrinksTax = db.Column(db.DECIMAL, nullable=False)
     protuarieFeeTax = db.Column(db.DECIMAL, nullable=False)
-    

@@ -4,6 +4,7 @@ from flask_restx import Namespace, Resource, fields
 import pandas as pd
 
 from domain.create_dte_registers_use_case import createDteRegisterUseCase
+from domain.dto.base_response_dto import BaseResponseDTO
 
 api = Namespace('fileUpload', 'File upload operations')
 
@@ -20,8 +21,8 @@ class Upload(Resource):
         uploaded_file = args['file']  # This is FileStorage instance
         # url = do_something_with_file(uploaded_file)
         dataframe = process_file(uploaded_file)
-        createDteRegisterUseCase(dataframe)
-        return 200
+        result = createDteRegisterUseCase(dataframe)
+        return BaseResponseDTO.Schema().dump(result)
 
 
 def process_file(file):

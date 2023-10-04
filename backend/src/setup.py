@@ -30,4 +30,8 @@ def create_application():
     from flask_cors import CORS
     CORS(app)
 
+    # import flask_monitoringdashboard as dashboard
+    # dashboard.config.init_from(file='./config.cfg')
+    # dashboard.bind(app)
+
     return app

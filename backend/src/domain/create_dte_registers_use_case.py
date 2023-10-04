@@ -1,9 +1,11 @@
+from decimal import Decimal
 import pandas as pd
 import re
 from datetime import datetime
 from sqlalchemy import exc
 from data.models.db_models import db, DTEDocument, EmitterDTE, DTEReceptor, Establishment, DTEReceptor, CertifierDte, DteDocumentEstatus
 from domain.dte_excel_keys import DTEExcelKeys
+from domain.dto.base_response_dto import BaseResponseDTO
 
 format_string_withTimezone = "%Y-%m-%dT%H:%M:%S.%f%z"
 format_string_noTimezone = "%Y-%m-%dT%H:%M:%S"
@@ -23,8 +25,10 @@ def createDteRegisterUseCase(df: pd.DataFrame):
                         row[DTEExcelKeys.fecha_emision])
                     dteDocument.authNumber = authNumber
                     dteDocument.seriesNumber = row[DTEExcelKeys.serie]
-                    dteDocument.amountGrandTotal = row[DTEExcelKeys.montoTotal]
-                    dteDocument.amountIva = row[DTEExcelKeys.ivaImpuesto]
+                    dteDocument.amountGrandTotal = Decimal(
+                        row[DTEExcelKeys.montoTotal])
+                    dteDocument.amountIva = Decimal(
+                        row[DTEExcelKeys.ivaImpuesto])
                     dteDocument.petroleumTax = row[DTEExcelKeys.petroleoImpuesto]
                     dteDocument.tourismHospitalityTax = row[DTEExcelKeys.turismoHospedaje]
                     dteDocument.tourismPasajeTax = row[DTEExcelKeys.turismoPasaje]
@@ -94,6 +98,8 @@ def createDteRegisterUseCase(df: pd.DataFrame):
                     )
                     if (row[DTEExcelKeys.marcaAnulado] == "Si"):
                         dteDocument.isMarkedCancelled = 1
+                        dteDocument.amountGrandTotal = 0
+                        dteDocument.amountIva = 0
                     else:
                         dteDocument.isMarkedCancelled = 0
 
@@ -101,9 +107,11 @@ def createDteRegisterUseCase(df: pd.DataFrame):
 
                     db.session.add(dteDocument)
                     db.session.commit()
+        return BaseResponseDTO(data={"message": 'Carga exitosa'}, success=True)
     except exc.SQLAlchemyError as e:
         print(e)
         db.session.rollback()
+        return BaseResponseDTO(data={'error': 'Error en la carga del archivo'}, success=False)
 
 
 def checkIfDteExists(authNumber: str):
@@ -128,7 +136,8 @@ def convertStringToDatetime(strDate: str):
         # Check if the timezone is present and adjust the format string accordingly
         if strDate.endswith("Z"):
             format_string += "Z"
-        elif "-" in strDate or "+" in strDate:
+
+        if strDate.endswith('-06:00'):
             format_string += "%z"
 
         date_obj = datetime.strptime(strDate, format_string)
@@ -154,7 +163,7 @@ def findReceptor(nitReceptor: str):
 
 
 def findDocumentEstatus(IsMarkedCancelled: str):
-    if (IsMarkedCancelled == "Si"):
+    if (IsMarkedCancelled == "No"):
         return DteDocumentEstatus.query.filter_by(
             idDteDocumentEstatus=1
         ).first()
