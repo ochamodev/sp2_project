@@ -3,6 +3,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_dropzone/flutter_dropzone.dart';
+import 'package:frontend_sp2/core/theming/dimens.dart';
 import 'package:frontend_sp2/core/theming/img_paths.dart';
 
 class FileUploadScreen extends StatelessWidget {
@@ -14,7 +15,7 @@ class FileUploadScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const SizedBox(height: 25.0),
+            const SizedBox(height: Dimens.topSeparation),
             Text(
               "Sube tu archivo",
               style: Theme.of(context).textTheme.headline4,
@@ -59,11 +60,15 @@ class _UploadFileContainer extends StatelessWidget {
     var media = MediaQuery.of(context);
     return GestureDetector(
       onTap: () async {
-        FilePickerResult? result = await FilePicker.platform.pickFiles(allowedExtensions: ['.xlsx']);
+        FilePickerResult? result = await FilePicker.platform.pickFiles(
+            type: FileType.custom,
+            allowedExtensions: ['xls'],
+            allowMultiple: false
+        );
       },
       child: DottedBorder(
           dashPattern: const [6, 3, 2, 3],
-          child: Container(
+          child: SizedBox(
               height: media.size.height / 4,
               width: media.size.width / 3,
               child: const Column(

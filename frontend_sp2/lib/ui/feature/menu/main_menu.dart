@@ -13,7 +13,7 @@ class MainMenuScreen extends StatefulWidget {
 }
 
 class _MyMenuPageState extends State<MainMenuScreen> {
-  PageController pageController = PageController();
+  PageController pageController = PageController(initialPage: 1);
   SideMenuController sideMenu = SideMenuController();
 
   @override
@@ -21,6 +21,7 @@ class _MyMenuPageState extends State<MainMenuScreen> {
     sideMenu.addListener((index) {
       pageController.jumpToPage(index);
     });
+
     super.initState();
   }
 
