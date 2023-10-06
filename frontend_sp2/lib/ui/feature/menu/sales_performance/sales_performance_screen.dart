@@ -1,10 +1,7 @@
 
 import 'package:flutter/material.dart';
-import 'package:frontend_sp2/core/formatting.dart';
 import 'package:frontend_sp2/core/theming/app_colors.dart';
 import 'package:frontend_sp2/core/theming/dimens.dart';
-import 'package:frontend_sp2/core/ui/chart_component.dart';
-import 'package:frontend_sp2/ui/feature/menu/file_upload/views/sales_performance_block_info_item.dart';
 import 'package:frontend_sp2/ui/feature/menu/file_upload/views/sales_performance_boards.dart';
 
 class SalesPerformanceScreen extends StatelessWidget {
@@ -17,7 +14,7 @@ class SalesPerformanceScreen extends StatelessWidget {
       height: media.size.height,
       width: media.size.width,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 80),
+        padding: const EdgeInsets.symmetric(horizontal: 16),
         child: Column(
           children: [
             const SizedBox(height: Dimens.topSeparation),
@@ -25,7 +22,7 @@ class SalesPerformanceScreen extends StatelessWidget {
               "Filtrar por año",
               style: Theme.of(context).textTheme.headline4,
             ),
-            SizedBox(height: Dimens.itemSeparationHeight),
+            const SizedBox(height: Dimens.itemSeparationHeight),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -54,11 +51,11 @@ class SalesPerformanceScreen extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: Dimens.itemSeparationHeight),
-            SingleChildScrollView(
+            const SizedBox(height: Dimens.itemSeparationHeight),
+            const SingleChildScrollView(
               child: Card(
                 child: Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 8),
                   child: Column(
                     children: [
                       SalesPerformanceBoards(

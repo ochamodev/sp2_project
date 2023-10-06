@@ -28,7 +28,7 @@ class Upload(Resource):
 def process_file(file):
     # To read multiple sheets
     df: pd.DataFrame = pd.read_excel(
-        file, sheet_name="InformacionDTE-FEL")
+        file, sheet_name=0)
     df.columns = df.columns.str.replace(' ', '')
     df = df.rename(columns={
         'Fechadeemisión': '0',
@@ -63,10 +63,3 @@ def process_file(file):
         'TarifaPortuaria(montodeesteimpuesto)': '29'
     })
     return df
-    # Iterate over the rows
-    # print("this are the keys")
-    # print(df.columns)
-    # for index, row in df.iterrows():
-    # Now 'row' contains the data for each row
-    # print(row)
-    # print(index)
