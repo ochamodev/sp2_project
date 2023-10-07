@@ -14,9 +14,10 @@ class CertifierDte(db.Model):
     idNitCertifier = db.Column(db.Integer, primary_key=True)
     fullNameCertifier = db.Column(db.String)
     nitCertifier = db.Column(db.String(25), nullable=False)
+    dte_documents = db.relationship("DTEDocument", backref="certifierData")
 
 
-class DteDocumenTEstatus(db.Model):
+class DteDocumentEstatus(db.Model):
     __tablename__ = "DteDocumentEstatus"
     idDteDocumentEstatus = db.Column(db.Integer, primary_key=True)
     descriptionEstatus = db.Column(db.String(255))
@@ -44,13 +45,14 @@ class EmitterDTE(db.Model):
 class Establishment(db.Model):
     __tablename__ = "Establishment"
     idEstablishment = db.Column(db.Integer, primary_key=True)
+    establishmentCode = db.Column(db.Integer, nullable=False)
     nitEmitter = db.Column(
         db.Integer, db.ForeignKey('EmitterDTE.idEmitterDte'), nullable=False
     )
     nameEmitter = db.Column(
         db.String(255), nullable=False
     )
-    dte_documents = db.relationship("DTEDocument", backref="establishment")
+    dte_documents = db.relationship("DTEDocument", backref="establishmentData")
 
 
 class PlatformUser(db.Model):
@@ -82,17 +84,16 @@ class DTEDocument(db.Model):
     )
     authNumber = db.Column(db.String)
     seriesNumber = db.Column(db.String)
-    emissionDate = db.Column(db.DateTime)
+    emissionDate = db.Column(db.Date)
     cancellationDate = db.Column(db.DateTime)
     isMarkedCancelled = db.Column(db.Integer, nullable=False)
     amountGrandTotal = db.Column(db.DECIMAL, nullable=False)
     amountIva = db.Column(db.DECIMAL, nullable=False)
     petroleumTax = db.Column(db.DECIMAL, nullable=False)
     tourismHospitalityTax = db.Column(db.DECIMAL, nullable=False)
-    tourismPadbjeTax = db.Column(db.DECIMAL, nullable=False)
-    timbreDePrendbTax = db.Column(db.DECIMAL, nullable=False)
+    tourismPasajeTax = db.Column(db.DECIMAL, nullable=False)
+    timbreDePrensaTax = db.Column(db.DECIMAL, nullable=False)
     firefightersTax = db.Column(db.DECIMAL, nullable=False)
-    municipalTax = db.Column(db.DECIMAL, nullable=False)
     municipalFeeTax = db.Column(db.DECIMAL, nullable=False)
     alcoholicDrinksTax = db.Column(db.DECIMAL, nullable=False)
     tabaccoTax = db.Column(db.DECIMAL, nullable=False)

@@ -33,9 +33,11 @@ class UserService(Resource):
     @api.expect(loginModel)
     def post(self):
         logindto: LoginDTO = LoginDTO.Schema().load(api.payload)
-        result = validate_login_use_case(logindto=logindto)
+        result, emitter = validate_login_use_case(logindto=logindto)
         if (result):
-            access_token = create_access_token(identity=logindto.email)
+            additional_claims = {'e': emitter}
+            access_token = create_access_token(
+                identity=logindto.email, additional_claims=additional_claims)
             response = BaseResponseDTO(
                 data={'access_token': access_token}, success=True)
             return BaseResponseDTO.Schema().dump(response)

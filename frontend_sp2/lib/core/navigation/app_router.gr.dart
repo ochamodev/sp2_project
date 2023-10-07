@@ -21,16 +21,16 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const HomeScreen(),
       );
     },
-    RegisterUserRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const RegisterUserScreen(),
-      );
-    },
     MainMenuRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const MainMenuScreen(),
+      );
+    },
+    RegisterUserRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const RegisterUserScreen(),
       );
     },
   };
@@ -51,20 +51,6 @@ class HomeRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [RegisterUserScreen]
-class RegisterUserRoute extends PageRouteInfo<void> {
-  const RegisterUserRoute({List<PageRouteInfo>? children})
-      : super(
-          RegisterUserRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'RegisterUserRoute';
-
-  static const PageInfo<void> page = PageInfo<void>(name);
-}
-
-/// generated route for
 /// [MainMenuScreen]
 class MainMenuRoute extends PageRouteInfo<void> {
   const MainMenuRoute({List<PageRouteInfo>? children})
@@ -74,6 +60,20 @@ class MainMenuRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'MainMenuRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [RegisterUserScreen]
+class RegisterUserRoute extends PageRouteInfo<void> {
+  const RegisterUserRoute({List<PageRouteInfo>? children})
+      : super(
+          RegisterUserRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'RegisterUserRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

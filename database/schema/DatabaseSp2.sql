@@ -1,5 +1,4 @@
 CREATE DATABASE IF NOT EXISTS ProyectoSP2;
-
 USE ProyectoSP2;
 
 CREATE TABLE IF NOT EXISTS EmitterDTE(
@@ -41,16 +40,19 @@ CREATE TABLE IF NOT EXISTS PlatformUser(
     PRIMARY KEY (idUser),
     FOREIGN KEY (nitEmitter)
         REFERENCES EmitterDTE(idEmitterDte)
+        ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS Establishment(
     idEstablishment INT AUTO_INCREMENT,
+    establishmentCode INT NOT NULL,
     nitEmitter INT NOT NULL,
     nameEmitter VARCHAR(255) NOT NULL,
     PRIMARY KEY (idEstablishment),
     FOREIGN KEY (nitEmitter)
-        REFERENCES EmitterDTE(idEmitterDte),
-    UNIQUE (nitEmitter, nameEmitter)
+        REFERENCES EmitterDTE(idEmitterDte)
+        ON DELETE CASCADE,
+    UNIQUE (nitEmitter, nameEmitter, establishmentCode)
 );
 
 CREATE TABLE IF NOT EXISTS DTEDocument(
@@ -61,32 +63,35 @@ CREATE TABLE IF NOT EXISTS DTEDocument(
     idDteDocumentEstatus INT NOT NULL,
     authNumber TEXT,
     seriesNumber TEXT,
-    emissionDate DATETIME,
+    emissionDate DATE,
     cancellationDate DATETIME,
     isMarkedCancelled TINYINT NOT NULL,
-    amountGrandTotal DECIMAL(13, 4) NOT NULL,
-    amountIva DECIMAL(13,4) NOT NULL,
-    petroleumTax DECIMAL(13, 4) NOT NULL,
-    tourismHospitalityTax DECIMAL(13, 4) NOT NULL,
-    tourismPasajeTax DECIMAL(13, 4) NOT NULL,
-    timbreDePrensaTax DECIMAL(13, 4) NOT NULL,
-    firefightersTax DECIMAL(13, 4) NOT NULL,
-    municipalTax DECIMAL(13, 4) NOT NULL,
-    municipalFeeTax DECIMAL(13, 4) NOT NULL,
-    alcoholicDrinksTax DECIMAL(13, 4) NOT NULL,
-    tabaccoTax DECIMAL(13, 4) NOT NULL,
-    cementTax DECIMAL(13, 4) NOT NULL,
-    noAlcoholicDrinksTax DECIMAL(13, 4) NOT NULL,
-    protuarieFeeTax DECIMAL(13, 4) NOT NULL,
+    amountGrandTotal DECIMAL(13, 2) NOT NULL,
+    amountIva DECIMAL(13,2) NOT NULL,
+    petroleumTax DECIMAL(13, 2) NOT NULL,
+    tourismHospitalityTax DECIMAL(13, 2) NOT NULL,
+    tourismPasajeTax DECIMAL(13, 2) NOT NULL,
+    timbreDePrensaTax DECIMAL(13, 2) NOT NULL,
+    firefightersTax DECIMAL(13, 2) NOT NULL,
+    municipalFeeTax DECIMAL(13, 2) NOT NULL,
+    alcoholicDrinksTax DECIMAL(13, 2) NOT NULL,
+    tabaccoTax DECIMAL(13, 2) NOT NULL,
+    cementTax DECIMAL(13, 2) NOT NULL,
+    noAlcoholicDrinksTax DECIMAL(13, 2) NOT NULL,
+    protuarieFeeTax DECIMAL(13, 2) NOT NULL,
     PRIMARY KEY (idDTEDocument),
     FOREIGN KEY (idEstablishment)
-        REFERENCES Establishment(idEstablishment),
+        REFERENCES Establishment(idEstablishment)
+        ON DELETE CASCADE,
     FOREIGN KEY (idCertifier)
-        REFERENCES CertifierDTE(idNitCertifier),
+        REFERENCES CertifierDTE(idNitCertifier)
+        ON DELETE CASCADE,
     FOREIGN KEY (idDteDocumentEstatus)
-        REFERENCES DteDocumentEstatus(idDteDocumentEstatus),
+        REFERENCES DteDocumentEstatus(idDteDocumentEstatus)
+        ON DELETE CASCADE,
     FOREIGN KEY (idReceptor)
         REFERENCES DTEReceptor(idDteReceptor)
+        ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS ResponseCodes(
@@ -94,5 +99,5 @@ CREATE TABLE IF NOT EXISTS ResponseCodes(
     respCode VARCHAR(255) NOT NULL,
     respDescription VARCHAR(255) NOT NULL,
     PRIMARY KEY (idResponse),
-    UNIQUE(respDescription)
+    UNIQUE(respCode)
 )

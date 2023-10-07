@@ -11,7 +11,8 @@ from flask_jwt_extended import JWTManager
 
 def create_application():
     app = Flask(__name__)
-    app.config["SQLALCHEMY_DATABASE_URI"] = "mysql+mysqlconnector://root:rootpassword@localhost:3306/proyectosp2"
+    app.config["SQLALCHEMY_DATABASE_URI"] = "mysql+mysqlconnector://root:root@localhost:3306/proyectosp2"
+    app.config["SQLALCHEMY_POOL_RECYCLE"] = 280
 
     # Setup the Flask-JWT-Extended extension
     app.config["JWT_SECRET_KEY"] = "super-secret"  # Change this!
@@ -28,6 +29,10 @@ def create_application():
     apiSp2.init_app(app)
 
     from flask_cors import CORS
-    CORS(app)
+    CORS(app, origins=['*'])
+
+    # import flask_monitoringdashboard as dashboard
+    # dashboard.config.init_from(file='./config.cfg')
+    # dashboard.bind(app)
 
     return app

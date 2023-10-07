@@ -5,7 +5,7 @@ INSERT INTO responseCodes(respCode, respDescription)
 	VALUES('U0','Cuenta creada');
     
 INSERT INTO responseCodes(respCode, respDescription)
-	VALUES('U0','No se pudo crear la cuenta');
+	VALUES('U1','No se pudo crear la cuenta');
     
 INSERT INTO responseCodes(respCode, respDescription)
 	VALUES('U2','Inicio de sesión exitoso');

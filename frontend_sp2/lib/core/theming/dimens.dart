@@ -6,4 +6,8 @@ abstract class Dimens {
   // register
   static const double rowSeparationRegister = 20.0;
 
+  static const double topSeparation = 25.0;
+
+  static const double itemSeparationHeight = 20.0;
+
 }

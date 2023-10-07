@@ -41,6 +41,8 @@ dependencies:
   equatable: 2.0.0
   formz: 0.6.0
 
+  dotted_border: ^2.1.0
+
   #router
   auto_route: 7.7.1
 
@@ -68,11 +70,22 @@ dependencies:
 
   fpdart: 1.1.0
 
+  flutter_animate: ^4.2.0+1
+
   #file upload
   file_picker: 5.5.0
 
+  #http parser
+  http_parser: ^4.0.2
+
+  #dropzone
+  flutter_dropzone: ^3.0.6
+
   #side_menu
   easy_sidemenu: 0.5.0
+
+  #charts
+  high_chart: ^2.0.3
 
 dev_dependencies:
   flutter_test:
@@ -102,6 +115,7 @@ flutter:
   uses-material-design: true
   assets:
     - assets/anim/
+    - assets/img/
 
   # To add assets to your application, add an assets section, like this:
   # assets:
