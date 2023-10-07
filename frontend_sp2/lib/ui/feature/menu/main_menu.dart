@@ -13,7 +13,7 @@ class MainMenuScreen extends StatefulWidget {
 }
 
 class _MyMenuPageState extends State<MainMenuScreen> {
-  PageController pageController = PageController(initialPage: 1);
+  PageController pageController = PageController(initialPage: 0);
   SideMenuController sideMenu = SideMenuController();
 
   @override
@@ -161,7 +161,7 @@ class _MyMenuPageState extends State<MainMenuScreen> {
             child: PageView(
               controller: pageController,
               children: [
-                FileUploadScreen(),
+                const FileUploadScreen(),
                 SalesPerformanceScreen(),
                 Container(
                   color: Colors.white,

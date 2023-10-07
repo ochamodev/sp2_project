@@ -1,5 +1,6 @@
 
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:dio/dio.dart';
 import 'package:fpdart/fpdart.dart';
@@ -31,6 +32,29 @@ class FileUploadCaller {
       var response = await Dio().post(
           NetworkCallMethods.fileUpload,
           options: Options(contentType: 'multipart/form-data'),
+          data: formData
+      );
+      return Either.right(BaseResponse.fromJson(response.data));
+    } catch (e) {
+      logger.e(e);
+      return Either.left(e as Exception);
+    }
+  }
+
+  Future<Either<Exception, BaseResponse>> uploadFileBytes(Uint8List file) async {
+    var formData = FormData.fromMap({
+      'file': MultipartFile.fromBytes(
+          file,
+          contentType: MediaType(
+              'application',
+              'vnd.ms-excel'
+          ),
+          filename: "ventas.xls"
+      )
+    });
+    try {
+      var response = await dio.post(
+          NetworkCallMethods.fileUpload,
           data: formData
       );
       return Either.right(BaseResponse.fromJson(response.data));

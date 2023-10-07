@@ -29,7 +29,7 @@ def create_application():
     apiSp2.init_app(app)
 
     from flask_cors import CORS
-    CORS(app)
+    CORS(app, origins=['*'])
 
     # import flask_monitoringdashboard as dashboard
     # dashboard.config.init_from(file='./config.cfg')
