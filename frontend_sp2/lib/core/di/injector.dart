@@ -5,8 +5,10 @@ import 'package:frontend_sp2/data/base_api_caller.dart';
 import 'package:frontend_sp2/data/file_upload_caller.dart';
 import 'package:frontend_sp2/domain/file_upload_use_case.dart';
 import 'package:frontend_sp2/domain/login_use_case.dart';
+import 'package:frontend_sp2/domain/logout_use_case.dart';
 import 'package:frontend_sp2/domain/register_user_use_case.dart';
 import 'package:frontend_sp2/ui/feature/login/state/login_cubit.dart';
+import 'package:frontend_sp2/ui/feature/menu/cubit/main_menu_cubit.dart';
 import 'package:frontend_sp2/ui/feature/menu/state/file_upload_cubit.dart';
 import 'package:frontend_sp2/ui/feature/register/state/register_user_cubit.dart';
 import 'package:get_it/get_it.dart';
@@ -29,11 +31,12 @@ Future<void> initializeInjectedDependencies() async {
   getIt.registerSingleton(LoginUseCase(getIt()));
   getIt.registerSingleton(RegisterUserUseCase(getIt()));
   getIt.registerSingleton(FileUploadCallerUseCase(getIt()));
-
+  getIt.registerSingleton(LogoutUseCase(getIt()));
   // blocs factories
   getIt.registerFactory(() => LoginCubit(getIt(), getIt()));
   getIt.registerFactory(() => RegisterUserCubit(getIt()));
   getIt.registerFactory(() => FileUploadCubit(getIt(), getIt()));
+  getIt.registerFactory(() => MainMenuCubit(getIt()));
 
 
 }

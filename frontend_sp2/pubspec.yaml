@@ -81,9 +81,6 @@ dependencies:
   #dropzone
   flutter_dropzone: ^3.0.6
 
-  #side_menu
-  easy_sidemenu: 0.5.0
-
   #charts
   high_chart: ^2.0.3
 
