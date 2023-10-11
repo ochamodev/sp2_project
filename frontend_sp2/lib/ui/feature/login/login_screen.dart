@@ -26,6 +26,7 @@ class LoginScreen extends StatelessWidget {
         listener: (context, state) {
           switch (state.loginStatus) {
             case LoginStatusResult.success:
+              AutoRouter.of(context).popUntilRoot();
               AutoRouter.of(context).replace(const MainMenuRoute());
               break;
             case LoginStatusResult.error:

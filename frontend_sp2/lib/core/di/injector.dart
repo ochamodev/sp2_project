@@ -1,12 +1,14 @@
 
 import 'package:dio/dio.dart';
 import 'package:frontend_sp2/core/navigation/app_router.dart';
+import 'package:frontend_sp2/core/navigation/main_menu_guard.dart';
 import 'package:frontend_sp2/data/base_api_caller.dart';
 import 'package:frontend_sp2/data/file_upload_caller.dart';
 import 'package:frontend_sp2/domain/file_upload_use_case.dart';
 import 'package:frontend_sp2/domain/login_use_case.dart';
 import 'package:frontend_sp2/domain/logout_use_case.dart';
 import 'package:frontend_sp2/domain/register_user_use_case.dart';
+import 'package:frontend_sp2/domain/user_authenticated_use_case.dart';
 import 'package:frontend_sp2/ui/feature/login/state/login_cubit.dart';
 import 'package:frontend_sp2/ui/feature/menu/cubit/main_menu_cubit.dart';
 import 'package:frontend_sp2/ui/feature/menu/state/file_upload_cubit.dart';
@@ -32,12 +34,15 @@ Future<void> initializeInjectedDependencies() async {
   getIt.registerSingleton(RegisterUserUseCase(getIt()));
   getIt.registerSingleton(FileUploadCallerUseCase(getIt()));
   getIt.registerSingleton(LogoutUseCase(getIt()));
+  getIt.registerSingleton(UserAuthenticatedUseCase(getIt()));
   // blocs factories
   getIt.registerFactory(() => LoginCubit(getIt(), getIt()));
   getIt.registerFactory(() => RegisterUserCubit(getIt()));
   getIt.registerFactory(() => FileUploadCubit(getIt(), getIt()));
   getIt.registerFactory(() => MainMenuCubit(getIt()));
 
+  // guards
+  getIt.registerSingleton(MainMenuGuard(getIt()));
 
 }
 

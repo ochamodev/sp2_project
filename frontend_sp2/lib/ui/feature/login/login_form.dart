@@ -75,18 +75,28 @@ class _UserPasswordInput extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<LoginCubit, LoginState>(
       buildWhen: (previousState, currentState) {
-        return previousState.password != currentState.password;
+        return previousState != currentState;
       },
       builder: (context, state) {
         return TextField(
           controller: context.read<LoginCubit>().userPasswordCtrl,
           onChanged: (password) => context
               .read<LoginCubit>().onPasswordChanged(password),
-          obscureText: true,
+          obscureText: state.obscurePassword,
           decoration: InputDecoration(
-              labelText: 'Contraseña',
-              border: const OutlineInputBorder(),
-              errorText: state.password.error?.text()
+            labelText: 'Contraseña',
+            border: const OutlineInputBorder(),
+            errorText: state.password.error?.text(),
+            suffixIcon: IconButton(
+              icon: Icon(
+                  state.obscurePassword
+                      ? Icons.visibility
+                      : Icons.visibility_off
+              ),
+              onPressed: () {
+                context.read<LoginCubit>().showPassword();
+              },
+            )
           ),
         );
       },

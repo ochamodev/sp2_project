@@ -91,12 +91,22 @@ class _PasswordInput extends StatelessWidget {
         return TextField(
           controller: context.read<RegisterUserCubit>().userPasswordCtrl,
           onChanged: (value) => context.read<RegisterUserCubit>().onPasswordChanged(value),
+          obscureText: state.obscurePassword,
           decoration: InputDecoration(
               labelText: 'Contraseña',
               border: const OutlineInputBorder(),
-              errorText: state.password.error?.text()
+              errorText: state.password.error?.text(),
+              suffixIcon: IconButton(
+                icon: Icon(
+                    state.obscurePassword
+                        ? Icons.visibility
+                        : Icons.visibility_off
+                ),
+                onPressed: () {
+                  context.read<RegisterUserCubit>().showPassword();
+                },
+              )
           ),
-          obscureText: true,
         );
       },
     );

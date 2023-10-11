@@ -17,10 +17,8 @@ class LoginCubit extends Cubit<LoginState> {
   TextEditingController userEmailCtrl = TextEditingController();
   TextEditingController userPasswordCtrl = TextEditingController();
 
-  LoginCubit(
-      this._sharedPreferences,
-      this._loginUseCase
-  ) : super(_Initial());
+  LoginCubit(this._sharedPreferences,
+      this._loginUseCase) : super(_Initial());
 
   void resetForm() {
     userEmailCtrl.text = "";
@@ -32,8 +30,8 @@ class LoginCubit extends Cubit<LoginState> {
     final email = EmailInput.dirty(value);
 
     emit(state.copyWith(
-      email: email,
-      formIsValid: Formz.validate([email, state.password])
+        email: email,
+        formIsValid: Formz.validate([email, state.password])
     ));
   }
 
@@ -42,6 +40,12 @@ class LoginCubit extends Cubit<LoginState> {
     emit(state.copyWith(
         password: password,
         formIsValid: Formz.validate([state.email, password])
+    ));
+  }
+
+  void showPassword() {
+    emit(state.copyWith(
+      obscurePassword: !state.obscurePassword
     ));
   }
 
@@ -90,6 +94,7 @@ abstract class LoginState with _$LoginState {
     @Default(false) bool formIsValid,
     @Default(FormzSubmissionStatus.initial) FormzSubmissionStatus status,
     @Default(LoginStatusResult.initial) LoginStatusResult loginStatus,
-    @Default("") String message
+    @Default("") String message,
+    @Default(true) bool obscurePassword
   }) = _Initial;
 }

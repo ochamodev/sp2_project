@@ -1,5 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/widgets.dart';
+import 'package:frontend_sp2/core/di/injector.dart';
+import 'package:frontend_sp2/core/navigation/main_menu_guard.dart';
 import 'package:frontend_sp2/core/navigation/routes.dart';
 import 'package:frontend_sp2/ui/feature/home/home_screen.dart';
 import 'package:frontend_sp2/ui/feature/register/register_user_screen.dart';
@@ -22,7 +24,8 @@ class AppRouter extends _$AppRouter {
     ),
     AutoRoute(
       path: Routes.mainMenu,
-      page: MainMenuRoute.page
+      page: MainMenuRoute.page,
+      guards: [getIt<MainMenuGuard>()]
     )
   ];
 }

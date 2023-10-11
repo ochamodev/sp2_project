@@ -93,6 +93,12 @@ class RegisterUserCubit extends Cubit<RegisterUserFormState> {
     ));
   }
 
+  void showPassword() {
+    emit(state.copyWith(
+        obscurePassword: !state.obscurePassword
+    ));
+  }
+
   void onEmailChanged(String value) {
     final email = EmailInput.dirty(value);
 
@@ -181,6 +187,7 @@ class RegisterUserFormState with _$RegisterUserFormState {
     @Default(false) bool formIsValid,
     @Default(FormzSubmissionStatus.initial) FormzSubmissionStatus status,
     @Default("") String message,
+    @Default(true) bool obscurePassword,
     @Default(RegisterFormStatusResult.initial) RegisterFormStatusResult registerFormStatus,
   }) = _Initial;
 }
