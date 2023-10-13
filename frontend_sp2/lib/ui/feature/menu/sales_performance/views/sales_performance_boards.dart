@@ -2,7 +2,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend_sp2/core/formatting.dart';
-import 'package:frontend_sp2/ui/feature/menu/file_upload/views/sales_performance_block_info_item.dart';
+import 'package:frontend_sp2/ui/feature/menu/sales_performance/views/sales_performance_block_info_item.dart';
 
 class SalesPerformanceBoards extends StatelessWidget {
   final double annualSales;

@@ -205,9 +205,10 @@ class _UploadFileContainer extends StatelessWidget {
         uploadFromFilePicker(context);
       },
       child: DottedBorder(
-          dashPattern: const [6, 3, 2, 3],
+          dashPattern: const [3, 3],
+          color: AppColors.defaultGreyColor,
           child: SizedBox(
-              height: media.size.height / 4,
+              height: media.size.height / 3,
               width: media.size.width / 3,
               child: const Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -216,7 +217,7 @@ class _UploadFileContainer extends StatelessWidget {
                     image: AssetImage(ImgPaths.folderIcon),
                   ),
                   SizedBox(height: 8.0),
-                  Text("Puede arrastar tu archivo acá o puedes hacer click")
+                  Text("Arrastra tu archivo o haz click"),
                 ],
               ))),
     );

@@ -1,0 +1,38 @@
+{
+    "2021": {
+        "0": { "amount": 746612.10, "quantity": 493 },
+        "1": { "amount": 669555.38, "quantity": 378 },
+        "2": { "amount": 1080639.52, "quantity": 466 },
+        "3": { "amount": 1071422.77, "quantity": 498 },
+        "4": { "amount": 990626.85, "quantity": 540 },
+        "5": { "amount": 722925.08, "quantity": 549 },
+        "6": { "amount": 952131.33, "quantity": 510 },
+        "7": { "amount": 732850.03, "quantity": 364 },
+        "8": { "amount": 1045175.23, "quantity": 425 },
+        "9": { "amount": 669133.83, "quantity": 389 },
+        "10": { "amount": 929158.55, "quantity": 427 },
+        "11": { "amount": 1064157.31, "quantity": 385 }
+    },
+    "2022": {
+        "0": { "amount": 892016.43, "quantity": 531 },
+        "1": { "amount": 736131.53, "quantity": 385 },
+        "2": { "amount": 1081173.58, "quantity": 488 },
+        "3": { "amount": 800521.72, "quantity": 413 },
+        "4": { "amount": 819195.48, "quantity": 371 },
+        "5": { "amount": 878484.03, "quantity": 398 },
+        "6": { "amount": 967375.53, "quantity": 530 },
+        "7": { "amount": 829274.95, "quantity": 476 },
+        "8": { "amount": 902163.54, "quantity": 536 },
+        "9": { "amount": 1004909.88, "quantity": 523 },
+        "10": { "amount": 897049.42, "quantity": 428 },
+        "11": { "amount": 798715.34, "quantity": 498 }
+    },
+    "2023": {
+      "0": { "amount": 1079789.98, "quantity": 462 },
+      "1": { "amount": 751631.18, "quantity": 337 },
+      "2": { "amount": 963401.98, "quantity": 514 },
+      "3": { "amount": 661360.99, "quantity": 415 },
+      "4": { "amount": 694466.98, "quantity": 399 },
+      "5": { "amount": 900746.98, "quantity": 473 }
+    }
+}

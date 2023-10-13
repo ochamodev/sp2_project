@@ -1,83 +1,59 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:frontend_sp2/core/di/injector.dart';
+import 'package:frontend_sp2/core/theming/anim_paths.dart';
 import 'package:frontend_sp2/core/theming/app_colors.dart';
 import 'package:frontend_sp2/core/theming/dimens.dart';
-import 'package:frontend_sp2/ui/feature/menu/file_upload/views/sales_performance_boards.dart';
+import 'package:frontend_sp2/ui/feature/menu/sales_performance/views/sales_performance_boards.dart';
+import '../state/sales_performance_cubit.dart';
+
+import 'package:lottie/lottie.dart';
 
 class SalesPerformanceScreen extends StatelessWidget {
   const SalesPerformanceScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final media = MediaQuery.of(context);
-    return SizedBox(
-      height: media.size.height,
-      width: media.size.width,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: Column(
-          children: [
-            const SizedBox(height: Dimens.topSeparation),
-            Text(
-              "Filtrar por año",
-              style: Theme.of(context).textTheme.headline4,
-            ),
-            const SizedBox(height: Dimens.itemSeparationHeight),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                _YearFilter(
-                  label: "2020",
-                  onSelected: (value) {
+    return BlocProvider(
+        create: (_) => getIt<SalesPerformanceCubit>(),
+        child: SalesPerformancenBody(),
+    );
+  }
+}
 
-                  },
-                  selected: true,
-                ),
-                const SizedBox(width: Dimens.itemSeparationHeight),
-                _YearFilter(
-                  label: "2021",
-                  onSelected: (value) {
+class SalesPerformancenBody extends StatelessWidget {
+  SalesPerformanceBody({super.key});
 
-                  },
-                  selected: true,
-                ),
-                const SizedBox(width: Dimens.itemSeparationHeight),
-                _YearFilter(
-                  label: "2022",
-                  onSelected: (value) {
+  @override
+  Widget build(BuildContext context) {
 
-                  },
-                  selected: true,
-                ),
-              ],
-            ),
-            const SizedBox(height: Dimens.itemSeparationHeight),
-            const SingleChildScrollView(
-              child: Card(
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 8),
-                  child: Column(
-                    children: [
-                      SalesPerformanceBoards(
-                        annualSales: 1000.40,
-                        avgAnnualSales: 1000.40,
-                        currentMonthTotal: 1000.40,
-                        monthlyVariance: 1000.40,
-                      ),
-                      SizedBox(height: Dimens.itemSeparationHeight),
-
-                    ],
-                  ),
-                ),
-              ),
-            )
-          ],
-        ),
+    return Expanded(
+      child: BlocBuilder<SalesPerformanceCubit, SalesPerformanceScreenState>(
+        buildWhen: (previousState, state) => previousState != state,
+        builder: (BuildContext context, state) {
+          return state.when() {
+            initial: () {
+              return const SizedBox();
+            },
+            loading: () {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            },
+          };
+        },
       ),
     );
   }
-
 }
+
+
+
+
+
+
+
 
 class _YearFilter extends StatelessWidget {
   final String label;

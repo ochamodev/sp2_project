@@ -38,7 +38,7 @@ dependencies:
   #state management
   bloc: 8.0.3
   flutter_bloc: 8.0.1
-  equatable: 2.0.0
+  equatable: 2.0.5
   formz: 0.6.0
 
   dotted_border: ^2.1.0
@@ -83,6 +83,8 @@ dependencies:
 
   #charts
   high_chart: ^2.0.3
+  scidart: ^0.0.2-dev.12
+  fl_chart: 0.63.0
 
 dev_dependencies:
   flutter_test:
