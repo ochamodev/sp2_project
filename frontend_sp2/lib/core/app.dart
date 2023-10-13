@@ -116,8 +116,11 @@ class AppSp2 extends StatelessWidget {
             color: Colors.black,
           ),
         ),
+        colorScheme: ThemeData().colorScheme.copyWith(
+          primary: AppColors.darkBlue
+        ),
         appBarTheme: AppBarTheme(
-          backgroundColor: AppColors.defaultRedColor
+          backgroundColor: AppColors.lightOrange
         ),
 
       ),

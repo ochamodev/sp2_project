@@ -10,4 +10,8 @@ abstract class Dimens {
 
   static const double itemSeparationHeight = 20.0;
 
+  static const double radiusButton = 50.0;
+
+  static const double fixedButtonHeight = 50.0;
+
 }

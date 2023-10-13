@@ -34,10 +34,13 @@ class _DashboardCardHeader extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(label),
+          Text(label, style: Theme.of(context).textTheme.bodyText2?.copyWith(
+            color: Colors.white
+          )),
           Icon(
             icon,
             size: iconSize,
+            color: AppColors.deepPurple,
           ),
         ],
       ),

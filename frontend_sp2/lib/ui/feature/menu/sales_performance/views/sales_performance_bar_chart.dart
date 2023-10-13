@@ -1,5 +1,6 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:frontend_sp2/core/theming/app_colors.dart';
 import 'package:frontend_sp2/utils/formatting.dart';
 
 class SalesPerformanceBarChart extends StatelessWidget {
@@ -59,7 +60,9 @@ class SalesPerformanceBarChart extends StatelessWidget {
         (month) => BarChartGroupData(
       barsSpace: 4,
       x: month,
-      barRods: [BarChartRodData(toY: sales[month - 1])],
+      barRods: [BarChartRodData(toY: sales[month - 1], color: AppColors.deepPink, width: 40, borderRadius: const BorderRadius.all(
+        Radius.circular(0)
+      )) ],
       //showingTooltipIndicators: [0],
     ),
   )

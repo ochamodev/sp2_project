@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frontend_sp2/core/di/injector.dart';
 import 'package:frontend_sp2/core/navigation/app_router.dart';
+import 'package:frontend_sp2/core/theming/app_colors.dart';
 import 'package:frontend_sp2/core/theming/dimens.dart';
 import 'package:frontend_sp2/ui/feature/menu/cubit/main_menu_cubit.dart';
 import 'package:frontend_sp2/ui/feature/menu/file_upload/file_upload_screen.dart';
@@ -18,7 +19,7 @@ class MainMenuScreen extends StatefulWidget {
 
 class _MyMenuPageState extends State<MainMenuScreen> {
   late PageController pageController;
-
+  int _selectedIndex = 0;
   @override
   void initState() {
     pageController = PageController(initialPage: 0);
@@ -41,6 +42,7 @@ class _MyMenuPageState extends State<MainMenuScreen> {
           return false;
         },
         builder: (context, state) {
+          final mediaQuery = MediaQuery.of(context);
           return Scaffold(
             appBar: AppBar(
               title: const Text("Menu principal"),
@@ -50,10 +52,18 @@ class _MyMenuPageState extends State<MainMenuScreen> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 NavigationRail(
-                  selectedIndex: 0,
+                  selectedIndex: _selectedIndex,
                   labelType: NavigationRailLabelType.all,
+                  selectedIconTheme: Theme.of(context)
+                      .iconTheme
+                      .copyWith(color: AppColors.lightOrange),
+                  selectedLabelTextStyle: Theme.of(context)
+                      .textTheme
+                      .bodyLarge
+                      ?.copyWith(color: AppColors.lightOrange),
                   onDestinationSelected: (index) {
                     setState(() {
+                      _selectedIndex = index;
                       pageController.animateToPage(index,
                           duration: const Duration(milliseconds: 200),
                           curve: Curves.easeIn);
@@ -109,9 +119,20 @@ class _MyMenuPageState extends State<MainMenuScreen> {
                                 ElevatedButton(
                                     onPressed: () {
                                       pageController.animateToPage(0,
-                                          duration: const Duration(milliseconds: 200),
+                                          duration:
+                                              const Duration(milliseconds: 200),
                                           curve: Curves.ease);
+                                      _selectedIndex = 0;
+                                      setState(() {});
                                     },
+                                    style: ElevatedButton.styleFrom(
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(
+                                                Dimens.radiusButton)),
+                                        fixedSize: Size(mediaQuery.size.width * 0.25,
+                                            Dimens.fixedButtonHeight),
+                                        backgroundColor:
+                                            AppColors.defaultRedColor),
                                     child: const Text("Cancelar"))
                               ]),
                         )

@@ -9,6 +9,8 @@ abstract class AppColors {
   static Color defaultLightGreyColor = const Color(0xffc4c4c4);
   static Color defaultLightWhiteColor = const Color(0xFFf2f6fe);
 
+  static Color darkBlue = const Color(0xff0d3b66);
+
   //  Color Palette
   static Color hotPink = const Color(0xffd9296a);
   static Color deepPink = const Color(0xffa6296e);

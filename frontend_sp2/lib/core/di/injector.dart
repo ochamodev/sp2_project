@@ -57,8 +57,8 @@ Future<void> initializeInjectedDependencies() async {
 Dio setupDio() {
   final dio = Dio();
   dio.options.baseUrl = 'http://127.0.0.1:5000';
-  dio.options.connectTimeout = const Duration(seconds: 5);
-  dio.options.receiveTimeout = const Duration(seconds: 5);
+  dio.options.connectTimeout = const Duration(seconds: 20);
+  dio.options.receiveTimeout = const Duration(seconds: 20);
 
   dio.interceptors.add(InterceptorsWrapper(
     onRequest: (RequestOptions options, RequestInterceptorHandler handler) async {

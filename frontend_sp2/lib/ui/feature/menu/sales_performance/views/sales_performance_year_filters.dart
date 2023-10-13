@@ -22,12 +22,19 @@ class _YearFilter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FilterChip(
-      label: Text(label),
+      label: Text(
+        label,
+        style: Theme.of(context).textTheme.bodyText2?.copyWith(
+          color: selected ? Colors.white : Colors.black
+        ),
+      ),
       onSelected: onSelected,
       selected: selected,
+      checkmarkColor: Colors.white,
       backgroundColor: Colors.transparent,
       shape: const StadiumBorder(side: BorderSide()),
-      selectedColor: AppColors.defaultRedColor,
+      selectedColor: AppColors.darkBlue,
+
     );
   }
 

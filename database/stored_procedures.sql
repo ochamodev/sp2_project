@@ -77,7 +77,7 @@ END $$
 DELIMITER ;
 
 CALL StandardDeviationPerMonthByYear(1, 2023);
-CALL TotalSalesPerMonthByYear(1, 2023);
+CALL TotalSalesPerMonthByYear(1, 2022);
 CALL GetSalesPerformance(1);
 CALL ExistingBillingYears(1);
 

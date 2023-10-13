@@ -166,9 +166,9 @@ class _SubmitButton extends StatelessWidget {
                   : null,
               style: ElevatedButton.styleFrom(
                   shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(50)
+                      borderRadius: BorderRadius.circular(Dimens.radiusButton)
                   ),
-                  fixedSize: Size(mediaQuery.size.width, 50),
+                  fixedSize: Size(mediaQuery.size.width, Dimens.fixedButtonHeight),
                   backgroundColor: AppColors.defaultRedColor
               ),
               child: const Text("Iniciar sesión")

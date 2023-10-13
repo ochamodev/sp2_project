@@ -1,5 +1,6 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:frontend_sp2/core/theming/app_colors.dart';
 
 import '../../../../../utils/formatting.dart';
 
@@ -68,6 +69,7 @@ class SalesPerformanceLineChart extends StatelessWidget {
       isCurved: false,
       barWidth: 1,
       isStrokeCapRound: true,
+      color: AppColors.deepPurple,
       dotData: const FlDotData(show: true),
       belowBarData: BarAreaData(show: false),
       spots: months
