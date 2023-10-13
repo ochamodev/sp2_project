@@ -24,7 +24,6 @@ class SalesPerformanceCubit extends Cubit<SalesPerformanceScreenState> {
 
   void updateList(YearFilterModel model, bool selected) {
     var current = state as Current;
-    var currentModel = current.salesPerformanceReportModel!;
     var items = current.salesPerformanceReportModel!.yearFilters;
     var currentSelected = items.indexWhere((element) => element.selected == true);
     var index = items.indexWhere((element) => element.year == model.year);
