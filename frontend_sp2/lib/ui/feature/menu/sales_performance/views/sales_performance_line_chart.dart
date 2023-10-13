@@ -21,6 +21,7 @@ class SalesPerformanceLineChart extends StatelessWidget {
     bottomTitles: AxisTitles(
       sideTitles: SideTitles(
         showTitles: true,
+        interval: 1.0,
         reservedSize: 30,
         getTitlesWidget: (double value, TitleMeta meta) => SideTitleWidget(
           axisSide: meta.axisSide,
@@ -71,7 +72,7 @@ class SalesPerformanceLineChart extends StatelessWidget {
       belowBarData: BarAreaData(show: false),
       spots: months
           .map(
-            (e) => FlSpot(e.toDouble(), salesQuantity[e] as double),
+            (e) => FlSpot(e.toDouble(), salesQuantity[e - 1] as double),
       )
           .toList(),
     ),

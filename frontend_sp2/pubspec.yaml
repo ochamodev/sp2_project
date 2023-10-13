@@ -86,6 +86,8 @@ dependencies:
   scidart: ^0.0.2-dev.12
   fl_chart: 0.63.0
 
+  decimal: ^2.3.3
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

@@ -5,6 +5,7 @@ part 'year_filters.g.dart';
 
 @JsonSerializable()
 class YearFilters {
+  @JsonKey(name: "year")
   int year;
   YearFilters({
     required this.year

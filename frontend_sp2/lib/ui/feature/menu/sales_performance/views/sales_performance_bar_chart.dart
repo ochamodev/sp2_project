@@ -59,7 +59,7 @@ class SalesPerformanceBarChart extends StatelessWidget {
         (month) => BarChartGroupData(
       barsSpace: 4,
       x: month,
-      barRods: [BarChartRodData(toY: sales[month])],
+      barRods: [BarChartRodData(toY: sales[month - 1])],
       //showingTooltipIndicators: [0],
     ),
   )

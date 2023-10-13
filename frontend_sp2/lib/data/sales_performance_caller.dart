@@ -1,16 +1,17 @@
-import 'dart:convert';
 
 import 'package:dio/dio.dart';
-import 'package:flutter/services.dart';
 import 'package:fpdart/fpdart.dart';
+import 'package:frontend_sp2/core/network_call_methods.dart';
+import 'package:frontend_sp2/data/base_api_caller.dart';
 import 'package:frontend_sp2/data/response/base_response.dart';
+import 'package:frontend_sp2/data/response/response_code.dart';
 import 'package:frontend_sp2/data/response/sales_performance_elements.dart';
+import 'package:frontend_sp2/data/response/sales_performance_report_response.dart';
 import 'package:logger/logger.dart';
 
 import 'model/sales_performance_request.dart';
 
 class SalesPerformanceCaller{
-
   final Dio dio;
   final Logger logger;
 
@@ -19,45 +20,29 @@ class SalesPerformanceCaller{
     required this.logger,
   });
 
-  Future getSales({required int year}) async {
-    final String response = await rootBundle
-        .loadString('assets/dummy_data/sales_performance_dummy_data.json');
-    final data = await json.decode(response);
-
-    return data;
-  }
-
-
-  Future<Either<Exception, SalesPerformanceElements>> annualSales({dynamic json}) async {
-
-    List<SalesPerformanceModel> salesPerformances = [];
-
+  Future<Either<ResponseCode, SalesPerformanceReportResponse>> getSalesPerformance() async {
     try {
-
-      for (String year in json.keys) {
-        final Map<int, Map<String, num>> data = {};
-
-        final List<int> months =
-        json[year].keys.map((e) => int.parse(e)).toList().cast<int>();
-
-        for (int month in months) {
-          data[month] = {
-            "amount": json[year][month.toString()]["amount"],
-            "quantity": json[year][month.toString()]["quantity"],
-          };
-        }
-
-        salesPerformances
-            .add(SalesPerformanceModel(year: int.parse(year), data: data));
+      var url = NetworkCallMethods.salesPerformance;
+      var result = await dio.post(url);
+      logger.d("url: $url");
+      logger.d("response: ${result.data}");
+      final response = BaseResponse.fromJson(result.data);
+      if (response.success) {
+        logger.d("json: ${response.data}");
+        logger.d("json: ${response.data.runtimeType}");
+        return Either.right(SalesPerformanceReportResponse.fromJson(response.data));
+      } else {
+        return Either.left(ResponseCode.fromJson(response.data));
       }
-
-      return Either.right(salesPerformances as SalesPerformanceElements);
-
     } catch (e) {
       logger.e(e);
-      return Either.left(e as Exception);
+      return Either.left(
+          ResponseCode(
+              respCode: 'App',
+              respDescription: "Ha ocurrido un error"
+          )
+      );
     }
-
   }
 
 

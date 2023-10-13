@@ -34,7 +34,7 @@ class MonthFormat {
   static int nameToNumber({required String value}) => monthNames.indexOf(value);
   static String numberToName({required int value}) => monthNames[value];
   static String numberToAbbreviation({required int value}) =>
-      monthAbbreviatedNames[value];
+      monthAbbreviatedNames[value - 1];
 }
 
 class CurrencyFormat {

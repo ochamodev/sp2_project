@@ -39,11 +39,11 @@ class SalesPerformanceBoards extends StatelessWidget {
             value: CurrencyFormat.usCurrency(value: avgAnnualSales),
             icon: Icons.bar_chart
         ),
-        DashboardCardSimple(
+        /*DashboardCardSimple(
             label: 'Varianza mensual',
             value: CurrencyFormat.usCurrency(value: monthlyVariance),
             icon: Icons.bar_chart
-        )
+        )*/
       ],
     );
   }

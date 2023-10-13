@@ -5,11 +5,13 @@ part 'monthly_sales_per_year.g.dart';
 
 @JsonSerializable()
 class MonthlySalesPerYear {
-  final double amount;
+  @JsonKey(name: "amount")
+  final String amount;
   @JsonKey(name: "monthT")
   final int month;
   @JsonKey(name: "yearT")
   final int year;
+  @JsonKey(name: "quantity")
   final int quantity;
 
   MonthlySalesPerYear({

@@ -16,9 +16,9 @@ class BaseApiCaller {
     required this.logger
   });
 
-  Future<Either<ResponseCode, BaseResponse>> makePost(String url, BaseModel request ) async {
+  Future<Either<ResponseCode, BaseResponse>> makePost(String url, BaseModel? request ) async {
     try {
-      var result = await dio.post(url, data: request.toJson());
+      var result = await dio.post(url, data: request?.toJson());
       logger.d("url: $url");
       logger.d("response: ${result.data}");
       final response = BaseResponse.fromJson(result.data);

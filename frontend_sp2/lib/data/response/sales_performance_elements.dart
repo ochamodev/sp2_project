@@ -5,9 +5,11 @@ part 'sales_performance_elements.g.dart';
 
 @JsonSerializable()
 class SalesPerformanceElements {
-  final double amount;
-  @JsonKey(name: "monthT")
+  @JsonKey(name: "amount")
+  final String amount;
+  @JsonKey(name: "yearT")
   final int year;
+  @JsonKey(name: "quantity")
   final int quantity;
 
   SalesPerformanceElements({
