@@ -6,6 +6,7 @@ import 'package:frontend_sp2/core/navigation/app_router.dart';
 import 'package:frontend_sp2/core/theming/app_colors.dart';
 import 'package:frontend_sp2/core/theming/dimens.dart';
 import 'package:frontend_sp2/ui/feature/menu/cubit/main_menu_cubit.dart';
+import 'package:frontend_sp2/ui/feature/menu/customer_lifetime_value/customer_lifetime_value_screen.dart';
 import 'package:frontend_sp2/ui/feature/menu/file_upload/file_upload_screen.dart';
 import 'package:frontend_sp2/ui/feature/menu/sales_performance/sales_performance_screen.dart';
 
@@ -56,11 +57,11 @@ class _MyMenuPageState extends State<MainMenuScreen> {
                   labelType: NavigationRailLabelType.all,
                   selectedIconTheme: Theme.of(context)
                       .iconTheme
-                      .copyWith(color: AppColors.lightOrange),
+                      .copyWith(color:  Theme.of(context).colorScheme.primary),
                   selectedLabelTextStyle: Theme.of(context)
                       .textTheme
                       .bodyLarge
-                      ?.copyWith(color: AppColors.lightOrange),
+                      ?.copyWith(color: Theme.of(context).colorScheme.primary),
                   onDestinationSelected: (index) {
                     setState(() {
                       _selectedIndex = index;
@@ -76,6 +77,10 @@ class _MyMenuPageState extends State<MainMenuScreen> {
                     ),
                     NavigationRailDestination(
                       label: Text('Sales performance'),
+                      icon: Icon(Icons.point_of_sale_sharp),
+                    ),
+                    NavigationRailDestination(
+                      label: Text('Customer Lifetime value'),
                       icon: Icon(Icons.supervisor_account),
                     ),
                     NavigationRailDestination(
@@ -99,6 +104,7 @@ class _MyMenuPageState extends State<MainMenuScreen> {
                       children: [
                         const FileUploadScreen(),
                         const SalesPerformanceScreen(),
+                        const CustomerLifetimeValueScreen(),
                         Center(
                           child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -113,6 +119,14 @@ class _MyMenuPageState extends State<MainMenuScreen> {
                                     onPressed: () {
                                       context.read<MainMenuCubit>().logout();
                                     },
+                                    style:  ElevatedButton.styleFrom(
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(
+                                                Dimens.radiusButton)),
+                                        fixedSize: Size(mediaQuery.size.width * 0.25,
+                                            Dimens.fixedButtonHeight),
+                                        backgroundColor:
+                                        AppColors.deepPurple),
                                     child: const Text("Salir")),
                                 const SizedBox(
                                     height: Dimens.itemSeparationHeight),
@@ -131,8 +145,7 @@ class _MyMenuPageState extends State<MainMenuScreen> {
                                                 Dimens.radiusButton)),
                                         fixedSize: Size(mediaQuery.size.width * 0.25,
                                             Dimens.fixedButtonHeight),
-                                        backgroundColor:
-                                            AppColors.defaultRedColor),
+                                        backgroundColor: AppColors.lightOrange),
                                     child: const Text("Cancelar"))
                               ]),
                         )

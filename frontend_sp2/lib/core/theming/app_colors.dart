@@ -18,6 +18,11 @@ abstract class AppColors {
   static Color brightBlue = const Color(0xff030a8c);
   static Color lightOrange = const Color(0xffffae6b);
 
+  // new Color palette
+  static const background = Color(0xFFEBE8E8);
+  static const primary = Color(0xffD7406F);
+  static const secondary = Color(0xff241D23);
+  static const accent = Color(0xffF7896B);
   static ScrollbarThemeData scrollbarTheme =
   const ScrollbarThemeData().copyWith(
     thumbColor: MaterialStateProperty.all(defaultGreyColor),

@@ -60,7 +60,7 @@ class SalesPerformanceBarChart extends StatelessWidget {
         (month) => BarChartGroupData(
       barsSpace: 4,
       x: month,
-      barRods: [BarChartRodData(toY: sales[month - 1], color: AppColors.deepPink, width: 40, borderRadius: const BorderRadius.all(
+      barRods: [BarChartRodData(toY: sales[month - 1], color: AppColors.deepPurple, width: 40, borderRadius: const BorderRadius.all(
         Radius.circular(0)
       )) ],
       //showingTooltipIndicators: [0],

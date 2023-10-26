@@ -36,12 +36,13 @@ class AppSp2 extends StatelessWidget {
         useMaterial3: false,
         scaffoldBackgroundColor: AppColors.scaffoldBackgroundColor,
         scrollbarTheme: AppColors.scrollbarTheme,
+        primaryColor: Color(0xff241d23),
         textTheme: const TextTheme(
           headline1: TextStyle(
             fontSize: 96,
             fontWeight: FontWeight.w600,
             letterSpacing: -1.5,
-            color: Colors.black,
+            color: Colors.black
           ),
           headline2: TextStyle(
             fontSize: 60,
@@ -117,10 +118,12 @@ class AppSp2 extends StatelessWidget {
           ),
         ),
         colorScheme: ThemeData().colorScheme.copyWith(
-          primary: AppColors.darkBlue
+          primary: AppColors.deepPurple,
+          secondary: AppColors.secondary,
+          background: AppColors.background
         ),
         appBarTheme: AppBarTheme(
-          backgroundColor: AppColors.lightOrange
+          backgroundColor: AppColors.deepPurple
         ),
 
       ),

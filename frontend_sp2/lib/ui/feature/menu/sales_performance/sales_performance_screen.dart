@@ -29,7 +29,7 @@ class SalesPerformanceBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
+    return SizedBox(
       child: BlocBuilder<SalesPerformanceCubit, SalesPerformanceScreenState>(
           builder: (BuildContext context, state) {
             return state.when(current: (model) {

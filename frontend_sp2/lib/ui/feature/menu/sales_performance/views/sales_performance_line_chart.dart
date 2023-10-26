@@ -14,7 +14,7 @@ class SalesPerformanceLineChart extends StatelessWidget {
   LineTouchData get lineTouchData => LineTouchData(
     handleBuiltInTouches: true,
     touchTooltipData: LineTouchTooltipData(
-      tooltipBgColor: Colors.blueGrey.withOpacity(0.8),
+      tooltipBgColor: AppColors.defaultRedColor.withOpacity(0.3),
     ),
   );
 

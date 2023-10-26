@@ -33,7 +33,7 @@ class _YearFilter extends StatelessWidget {
       checkmarkColor: Colors.white,
       backgroundColor: Colors.transparent,
       shape: const StadiumBorder(side: BorderSide()),
-      selectedColor: AppColors.darkBlue,
+      selectedColor: AppColors.defaultRedColor,
 
     );
   }
