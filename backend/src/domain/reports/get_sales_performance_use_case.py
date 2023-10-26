@@ -89,3 +89,7 @@ def get_monthly_variance(companyCode: int, year: int):
 
     finally:
         connection.close()
+
+
+# subir el archivo en el background.
+#

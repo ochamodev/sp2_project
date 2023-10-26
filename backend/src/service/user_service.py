@@ -67,3 +67,6 @@ class ProtectedResource(Resource):
     @jwt_required()
     def get(self):
         return {'message': 'I am a protected resource'}
+
+
+# comparación de años
