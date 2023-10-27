@@ -119,7 +119,7 @@ def get_customer_lifetime_elements(companyCode: int, yearToRequest: int):
             customerValue = it[5]
             purchaseRate = it[6]
             purchaseValue = it[7]
-            dto = CustomerLifetimeValueItemDTO(monthT=monthT, amount=amount, clientCount=clientCount,
+            dto = CustomerLifetimeValueItemDTO(yearT=yearT, monthT=monthT, amount=amount, clientCount=clientCount,
                                                quantity=quantity, customerValue=customerValue, purchaseRate=purchaseRate, purchaseValue=purchaseValue)
             items.append(dto)
         return items

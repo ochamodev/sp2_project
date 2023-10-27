@@ -19,6 +19,7 @@ class CustomerLifetimeValueResponseDTO:
 
 @dataclass
 class CustomerLifetimeValueItemDTO:
+    yearT: int
     monthT: int
     amount: Decimal
     clientCount: int
