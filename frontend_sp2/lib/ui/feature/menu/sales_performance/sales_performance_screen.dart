@@ -48,7 +48,7 @@ class SalesPerformanceBody extends StatelessWidget {
                           style: Theme.of(context).textTheme.headline4,
                         ),
                         const SizedBox(height: Dimens.itemSeparationHeight),
-                        SalesPerformanceYearFilters(),
+                        const SalesPerformanceYearFilter(),
                         const SizedBox(height: Dimens.itemSeparationHeight),
                         Flexible(
                           child: ListView.builder(

@@ -3,7 +3,9 @@ import 'package:dio/dio.dart';
 import 'package:frontend_sp2/core/navigation/app_router.dart';
 import 'package:frontend_sp2/core/navigation/main_menu_guard.dart';
 import 'package:frontend_sp2/data/base_api_caller.dart';
+import 'package:frontend_sp2/data/customer_lifetime_value_caller.dart';
 import 'package:frontend_sp2/data/file_upload_caller.dart';
+import 'package:frontend_sp2/data/year_filter_api_caller.dart';
 import 'package:frontend_sp2/domain/customer_lifetime_value_use_case.dart';
 import 'package:frontend_sp2/domain/file_upload_use_case.dart';
 import 'package:frontend_sp2/domain/login_use_case.dart';
@@ -36,6 +38,8 @@ Future<void> initializeInjectedDependencies() async {
   getIt.registerSingleton(BaseApiCaller(dio: getIt(), logger: getIt()));
   getIt.registerSingleton(FileUploadCaller(dio: getIt(), logger: getIt()));
   getIt.registerSingleton(SalesPerformanceCaller(dio: getIt(), logger: getIt()));
+  getIt.registerSingleton(CustomerLifetimeValueCaller(dio: getIt(), logger: getIt()));
+  getIt.registerSingleton(YearFilterApiCaller(dio: getIt(), logger: getIt()));
   // use cases
   getIt.registerSingleton(LoginUseCase(getIt()));
   getIt.registerSingleton(RegisterUserUseCase(getIt()));
@@ -43,7 +47,7 @@ Future<void> initializeInjectedDependencies() async {
   getIt.registerSingleton(LogoutUseCase(getIt()));
   getIt.registerSingleton(UserAuthenticatedUseCase(getIt()));
   getIt.registerSingleton(SalesPerformanceUseCase(getIt()));
-  getIt.registerSingleton(CustomerLifetimeValueUseCase(getIt(), getIt()));
+  getIt.registerSingleton(CustomerLifetimeValueUseCase(getIt(), getIt(), getIt()));
   // blocs factories
   getIt.registerFactory(() => LoginCubit(getIt(), getIt()));
   getIt.registerFactory(() => RegisterUserCubit(getIt()));

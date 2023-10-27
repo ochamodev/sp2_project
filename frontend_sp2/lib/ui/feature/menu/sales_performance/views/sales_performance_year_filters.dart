@@ -4,43 +4,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frontend_sp2/core/theming/app_colors.dart';
 import 'package:frontend_sp2/core/theming/dimens.dart';
 import 'package:frontend_sp2/ui/feature/menu/state/sales_performance_cubit.dart';
+import 'package:frontend_sp2/ui/shared/year_filter.dart';
 
+class SalesPerformanceYearFilter extends StatelessWidget {
+  const SalesPerformanceYearFilter({super.key});
 
-
-class _YearFilter extends StatelessWidget {
-  final String label;
-  final Function(bool) onSelected;
-  final bool selected;
-
-  const _YearFilter({
-    super.key,
-    required this.label,
-    required this.onSelected,
-    this.selected = false
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return FilterChip(
-      label: Text(
-        label,
-        style: Theme.of(context).textTheme.bodyText2?.copyWith(
-          color: selected ? Colors.white : Colors.black
-        ),
-      ),
-      onSelected: onSelected,
-      selected: selected,
-      checkmarkColor: Colors.white,
-      backgroundColor: Colors.transparent,
-      shape: const StadiumBorder(side: BorderSide()),
-      selectedColor: AppColors.defaultRedColor,
-
-    );
-  }
-
-}
-
-class SalesPerformanceYearFilters extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<SalesPerformanceCubit, SalesPerformanceScreenState>(
@@ -55,7 +23,7 @@ class SalesPerformanceYearFilters extends StatelessWidget {
               children: model.yearFilters.map((it) {
                 return Padding(
                   padding: const EdgeInsets.only(right: Dimens.itemSeparationHeight),
-                  child: _YearFilter(
+                  child: YearFilter(
                     label: it.year,
                     selected: it.selected,
                     onSelected: (e) {

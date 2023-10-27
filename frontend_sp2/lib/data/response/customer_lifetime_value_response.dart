@@ -8,14 +8,14 @@ class CustomerLifetimeValueResponse {
   final String avgFrequencyMonth;
   final String avgMonthActive;
   final String avgPurchase;
-  final int totalClient;
+  final int totalClients;
   final Map<String, List<CustomerLifetimeValueItemResponse>> customerValuePerYear;
 
   CustomerLifetimeValueResponse({
     required this.avgFrequencyMonth,
     required this.avgMonthActive,
     required this.avgPurchase,
-    required this.totalClient,
+    required this.totalClients,
     required this.customerValuePerYear,
   });
 

@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:frontend_sp2/data/response/year_filters.dart';
+import 'package:frontend_sp2/data/response/year_filters_response.dart';
 import 'package:frontend_sp2/domain/model/sales_performance_elements_model.dart';
 import 'package:frontend_sp2/domain/model/sales_performance_report_model.dart';
 import 'package:frontend_sp2/domain/model/year_filter_model.dart';
@@ -43,9 +43,9 @@ class SalesPerformanceCubit extends Cubit<SalesPerformanceScreenState> {
   void getSalesPerformance() async {
     var result = await _salesPerformanceUseCase();
 
-    result.match((l) {}, (r) {
-      allElements.addAll(r.salesPerformanceElements);
-      emit(Current(salesPerformanceReportModel: r));
+    result.match((error) {}, (requestResult) {
+      allElements.addAll(requestResult.salesPerformanceElements);
+      emit(Current(salesPerformanceReportModel: requestResult));
     });
   }
 }

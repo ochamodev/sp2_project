@@ -38,7 +38,7 @@ class MonthFormat {
 }
 
 class CurrencyFormat {
-  static final _usCurrencyFormatter = NumberFormat("#,##0.00", "en_US");
+  static final _usCurrencyFormatter = NumberFormat("#,##0.00", "es_GT");
 
   static String usCurrency({required num value}) =>
       "\$${_usCurrencyFormatter.format(value)}";
