@@ -3,13 +3,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frontend_sp2/core/di/injector.dart';
+import 'package:frontend_sp2/core/theming/app_colors.dart';
 import 'package:frontend_sp2/core/theming/dimens.dart';
 import 'package:frontend_sp2/ui/feature/menu/customer_lifetime_value/views/customer_lifetime_summary_view.dart';
+import 'package:frontend_sp2/ui/feature/menu/customer_lifetime_value/views/customer_lifetime_value_bar_chart.dart';
 import 'package:frontend_sp2/ui/feature/menu/customer_lifetime_value/views/customer_lifetime_value_year_filters.dart';
 import 'package:frontend_sp2/ui/feature/menu/sales_performance/views/sales_performance_bar_chart.dart';
 import 'package:frontend_sp2/ui/feature/menu/sales_performance/views/sales_performance_line_chart.dart';
 import 'package:frontend_sp2/ui/feature/menu/sales_performance/views/sales_performance_year_filters.dart';
 import 'package:frontend_sp2/ui/feature/menu/state/customer_lifetime_value_cubit.dart';
+import 'package:frontend_sp2/ui/shared/legend_widget.dart';
 
 class CustomerLifetimeValueScreen extends StatelessWidget {
   const CustomerLifetimeValueScreen({super.key});
@@ -70,17 +73,26 @@ class CustomerLifetimeValueBody extends StatelessWidget {
                             child: Column(
                               children: [
                                 Text(
-                                  "Valor promedio generado por cliente ${item.year}",
+                                  "Valor y venta promedio generado por cliente ${item.year}",
                                   style: Theme.of(context).textTheme.headline4,
+                                ),
+                                const SizedBox(
+                                    height: Dimens.itemSeparationHeight),
+                                LegendsListWidget(
+                                  legends: [
+                                    Legend("Valor cliente", AppColors.deepPurple),
+                                    Legend("Venta promedio", AppColors.hotPink)
+                                  ],
                                 ),
                                 const SizedBox(
                                     height: Dimens.itemSeparationHeight),
                                 SizedBox(
                                   height: 300,
                                   width: media.size.width * 0.75,
-                                  child: SalesPerformanceBarChart(
+                                  child: CustomerLifetimeValueBarChart(
                                       months: item.months,
-                                      sales: item.customerValues
+                                      customerValue: item.customerValues,
+                                      purchaseValue: item.purchaseValues
                                   ),
                                 ),
                                 const SizedBox(

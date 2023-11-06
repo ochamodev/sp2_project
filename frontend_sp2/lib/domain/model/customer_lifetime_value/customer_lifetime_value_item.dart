@@ -3,12 +3,14 @@ import 'package:frontend_sp2/domain/model/customer_lifetime_value/customer_lifet
 
 class CustomerLifetimeValueItem {
   final List<double> customerValues;
+  final List<double> purchaseValues;
   final List<int> months;
   final int year;
   final List<CustomerLifetimeValueReportModelElements> elements;
 
   CustomerLifetimeValueItem({
     required this.customerValues,
+    required this.purchaseValues,
     required this.months,
     required this.elements,
     required this.year

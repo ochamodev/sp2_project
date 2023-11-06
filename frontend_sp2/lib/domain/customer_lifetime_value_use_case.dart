@@ -43,6 +43,7 @@ class CustomerLifetimeValueUseCase {
         List<int> months = items.map((e) => e.monthT).toList();
         List<double> customerValues =
             items.map((e) => double.parse(e.customerValue)).toList();
+        List<double> purchaseValues = items.map((e) => double.parse(e.purchaseValue)).toList();
         List<CustomerLifetimeValueReportModelElements> elements = [];
         for (var item in items) {
           elements.add(CustomerLifetimeValueReportModelElements(
@@ -54,7 +55,7 @@ class CustomerLifetimeValueUseCase {
               yearT: item.yearT));
         }
         var model = CustomerLifetimeValueItem(
-            customerValues: customerValues, months: months, elements: elements, year: int.parse(key)
+            customerValues: customerValues, months: months, elements: elements, purchaseValues: purchaseValues, year: int.parse(key)
         );
         plotElements.add(model);
       }
