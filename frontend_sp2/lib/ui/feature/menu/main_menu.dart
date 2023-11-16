@@ -10,6 +10,8 @@ import 'package:frontend_sp2/ui/feature/menu/customer_lifetime_value/customer_li
 import 'package:frontend_sp2/ui/feature/menu/file_upload/file_upload_screen.dart';
 import 'package:frontend_sp2/ui/feature/menu/sales_performance/sales_performance_screen.dart';
 
+import 'customer_retention/customer_retention_screen.dart';
+
 @RoutePage()
 class MainMenuScreen extends StatefulWidget {
   const MainMenuScreen({Key? key}) : super(key: key);
@@ -76,12 +78,17 @@ class _MyMenuPageState extends State<MainMenuScreen> {
                       icon: Icon(Icons.upload_file),
                     ),
                     NavigationRailDestination(
-                      label: Text('Sales performance'),
+                      label: Text('Desempeño de Ventas'),
                       icon: Icon(Icons.point_of_sale_sharp),
                     ),
                     NavigationRailDestination(
-                      label: Text('Customer Lifetime value'),
+                      label: Text('Valor Generado por Cliente'),
                       icon: Icon(Icons.supervisor_account),
+                    ),
+                    NavigationRailDestination(
+                      label: Text('Retención de Clientes'),
+                      icon: Icon(Icons.contact_emergency),
+                      // icon: Icon(Icons.wifi_protected_setup),
                     ),
                     NavigationRailDestination(
                       label: Text('Cerrar sesión'),
@@ -105,6 +112,7 @@ class _MyMenuPageState extends State<MainMenuScreen> {
                         const FileUploadScreen(),
                         const SalesPerformanceScreen(),
                         const CustomerLifetimeValueScreen(),
+                        const CustomerRetentionScreen(),
                         Center(
                           child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,

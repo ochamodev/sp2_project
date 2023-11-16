@@ -2,44 +2,44 @@ import 'package:intl/intl.dart';
 
 class MonthFormat {
   static const List<String> monthNames = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December"
+    "Enero",
+    "Febrero",
+    "Marzo",
+    "Abril",
+    "Mayo",
+    "Junio",
+    "Julio",
+    "Agosto",
+    "Septiembre",
+    "Octubre",
+    "Noviembre",
+    "Diciembre",
   ];
 
   static const List<String> monthAbbreviatedNames = [
-    "Jan",
+    "Ene",
     "Feb",
     "Mar",
-    "Apr",
+    "Abr",
     "May",
     "Jun",
     "Jul",
-    "Aug",
+    "Ago",
     "Sep",
     "Oct",
     "Nov",
-    "Dec"
+    "Dic"
   ];
 
   static int nameToNumber({required String value}) => monthNames.indexOf(value);
   static String numberToName({required int value}) => monthNames[value];
   static String numberToAbbreviation({required int value}) =>
-      monthAbbreviatedNames[value];
+      monthAbbreviatedNames[value - 1];
 }
 
 class CurrencyFormat {
-  static final _usCurrencyFormatter = NumberFormat("#,##0.00", "es_GT");
+  static final _usCurrencyFormatter = NumberFormat("#,##0.00", "en_US");
 
   static String usCurrency({required num value}) =>
-      "\$${_usCurrencyFormatter.format(value)}";
+      "Q. ${_usCurrencyFormatter.format(value)}";
 }

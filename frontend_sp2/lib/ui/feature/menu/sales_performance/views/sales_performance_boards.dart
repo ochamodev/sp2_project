@@ -27,7 +27,7 @@ class SalesPerformanceBoards extends StatelessWidget {
         DashboardCardSimple(
             label: 'Total ventas anuales',
             value: CurrencyFormat.usCurrency(value: annualSales),
-            icon: Icons.bar_chart
+            icon: Icons.bar_chart 
         ),
         DashboardCardSimple(
             label: 'Total ventas mes actual',
