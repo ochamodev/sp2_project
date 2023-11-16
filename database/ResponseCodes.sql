@@ -18,4 +18,10 @@ INSERT INTO responseCodes(respCode, respDescription)
     
 INSERT INTO responseCodes(respCode, respDescription)
 	VALUES('E0','Ya se registro la empresa con ese NIT');
+
+
+INSERT INTO proyectosp2.dtedocumentestatus(idDteDocumentEstatus, descriptionEstatus)
+	VALUES(1, 'Vigente');
     
+INSERT INTO proyectosp2.dtedocumentestatus(idDteDocumentEstatus, descriptionEstatus)
+	VALUES(2, 'Anulado');

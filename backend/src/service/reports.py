@@ -33,6 +33,15 @@ class CustomerLifetimeValue(Resource):
         result = get_customer_lifetime_value_use_case(claims['e'])
         return jsonify(result)
 
+@api.route('/customerRetentionRate')
+class CustomerRetentionRate(Resource):
+    @api.doc('CustomerRetentionRate')
+    @jwt_required()
+    def post(self):
+        claims = get_jwt()
+        result = get_customer_retention_rate_use_case(claims['e'])
+        return jsonify(result)
+
 
 @api.route('/yearFilters')
 class YearFiltersCompany(Resource):
