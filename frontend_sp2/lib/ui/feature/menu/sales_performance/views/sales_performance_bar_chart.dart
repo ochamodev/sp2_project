@@ -6,6 +6,7 @@ import 'package:frontend_sp2/utils/formatting.dart';
 class SalesPerformanceBarChart extends StatelessWidget {
   final List<int> months;
   final List<double> sales;
+
   const SalesPerformanceBarChart(
       {required this.months, required this.sales, super.key});
 
