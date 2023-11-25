@@ -6,6 +6,7 @@ from domain.reports.get_customer_lifetime_value_use_case import get_customer_lif
 from domain.response_codes import ResponseCodes
 from domain.reports.get_sales_performance_use_case import get_sales_performance_use_case
 from domain.reports.get_billing_year_use_case import get_billing_years_use_case
+from domain.reports.get_customer_retention_rate_use_case import get_customer_retention_use_case
 
 api = Namespace('reports', 'Report operations')
 
@@ -33,13 +34,13 @@ class CustomerLifetimeValue(Resource):
         result = get_customer_lifetime_value_use_case(claims['e'])
         return jsonify(result)
 
-@api.route('/customerRetentionRate')
+@api.route('/customerRetention')
 class CustomerRetentionRate(Resource):
-    @api.doc('CustomerRetentionRate')
+    @api.doc('CustomerRetention')
     @jwt_required()
     def post(self):
         claims = get_jwt()
-        result = get_customer_retention_rate_use_case(claims['e'])
+        result = get_customer_retention_use_case(claims['e'])
         return jsonify(result)
 
 
