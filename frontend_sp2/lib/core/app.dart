@@ -1,7 +1,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:frontend_sp2/core/navigation/app_router.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frontend_sp2/core/di/injector.dart';
 import 'package:frontend_sp2/core/theming/app_colors.dart';
 import 'package:frontend_sp2/core/theming/dimens.dart';
@@ -21,7 +20,7 @@ class AppSp2 extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       routerConfig: appRouter.config(),
-      title: "SP2 Proyecto",
+      title: "Prometheus Analytics",
       debugShowCheckedModeBanner: false,
       builder: (context, child) {
         final MediaQueryData mediaQueryData = MediaQuery.of(context);

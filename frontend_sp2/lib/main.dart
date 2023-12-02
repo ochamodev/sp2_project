@@ -6,16 +6,19 @@ import 'package:frontend_sp2/core/app.dart';
 import 'package:frontend_sp2/core/di/injector.dart';
 import 'package:logger/logger.dart';
 
+
+
 void main() async {
-  BindingBase.debugZoneErrorsAreFatal = true;
-  //WidgetsFlutterBinding.ensureInitialized();
-  await initializeInjectedDependencies();
-  runZonedGuarded(
-          () => runApp(AppSp2()),
-        (Object error, StackTrace stackTrace) {
-      if (!kReleaseMode) {
-        getIt<Logger>().e(error);
-      }
-    },
-  );
+  BindingBase.debugZoneErrorsAreFatal = false;
+
+
+  await runZonedGuarded(() async {
+    //WidgetsFlutterBinding.ensureInitialized();
+    await initializeInjectedDependencies();
+    runApp(AppSp2());
+  }, (error, stack) {
+    if (!kReleaseMode) {
+      getIt<Logger>().e(error);
+    }
+  });
 }

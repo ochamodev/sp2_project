@@ -1,5 +1,7 @@
 
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:frontend_sp2/core/navigation/app_router.dart';
 import 'package:frontend_sp2/core/navigation/main_menu_guard.dart';
 import 'package:frontend_sp2/data/base_api_caller.dart';
@@ -31,12 +33,18 @@ import '../../ui/feature/menu/state/sales_performance_cubit.dart';
 final getIt = GetIt.instance;
 
 Future<void> initializeInjectedDependencies() async {
-
+  final environment = DotEnv();
+  if (kReleaseMode) {
+    await environment.load(fileName: '.env.prod');
+  }
+  if (kDebugMode) {
+    await environment.load(fileName: '.env.dev');
+  }
   getIt.registerLazySingleton(() => Logger());
   getIt.registerSingleton(await SharedPreferences.getInstance());
   getIt.registerSingleton(AppRouter());
+  getIt.registerSingleton(environment);
   getIt.registerSingleton(setupDio());
-
   // api callers
   getIt.registerSingleton(BaseApiCaller(dio: getIt(), logger: getIt()));
   getIt.registerSingleton(FileUploadCaller(dio: getIt(), logger: getIt()));
@@ -68,7 +76,8 @@ Future<void> initializeInjectedDependencies() async {
 
 Dio setupDio() {
   final dio = Dio();
-  dio.options.baseUrl = 'http://127.0.0.1:5000';
+  String url = getIt<DotEnv>().get('BACKEND_URL');
+  dio.options.baseUrl = url;
   dio.options.connectTimeout = const Duration(seconds: 20);
   dio.options.receiveTimeout = const Duration(seconds: 20);
 

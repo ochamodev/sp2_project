@@ -35,6 +35,9 @@ dependencies:
   #di
   get_it: 7.6.0
 
+  #dotenv
+  flutter_dotenv: ^5.1.0
+
   #state management
   bloc: 8.0.3
   flutter_bloc: 8.0.1
@@ -117,6 +120,8 @@ flutter:
   assets:
     - assets/anim/
     - assets/img/
+    - .env.dev
+    - .env.prod
 
   # To add assets to your application, add an assets section, like this:
   # assets:
