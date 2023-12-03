@@ -33,6 +33,12 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const RegisterUserScreen(),
       );
     },
+    SelectCompanyRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const SelectCompanyScreen(),
+      );
+    },
   };
 }
 
@@ -74,6 +80,20 @@ class RegisterUserRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'RegisterUserRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [SelectCompanyScreen]
+class SelectCompanyRoute extends PageRouteInfo<void> {
+  const SelectCompanyRoute({List<PageRouteInfo>? children})
+      : super(
+          SelectCompanyRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'SelectCompanyRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

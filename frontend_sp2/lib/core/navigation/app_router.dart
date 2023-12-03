@@ -5,6 +5,7 @@ import 'package:frontend_sp2/core/navigation/main_menu_guard.dart';
 import 'package:frontend_sp2/core/navigation/routes.dart';
 import 'package:frontend_sp2/ui/feature/home/home_screen.dart';
 import 'package:frontend_sp2/ui/feature/register/register_user_screen.dart';
+import 'package:frontend_sp2/ui/feature/select_company/select_company_screen.dart';
 import 'package:frontend_sp2/ui/feature/menu/main_menu.dart';
 part './app_router.gr.dart';
 
@@ -21,6 +22,10 @@ class AppRouter extends _$AppRouter {
     AutoRoute(
       path: Routes.registerUser,
       page: RegisterUserRoute.page
+    ),
+    AutoRoute(
+      path: Routes.selectCompany,
+      page: SelectCompanyRoute.page
     ),
     AutoRoute(
       path: Routes.mainMenu,

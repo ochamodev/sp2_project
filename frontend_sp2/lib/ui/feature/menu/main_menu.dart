@@ -9,6 +9,7 @@ import 'package:frontend_sp2/ui/feature/menu/cubit/main_menu_cubit.dart';
 import 'package:frontend_sp2/ui/feature/menu/customer_lifetime_value/customer_lifetime_value_screen.dart';
 import 'package:frontend_sp2/ui/feature/menu/file_upload/file_upload_screen.dart';
 import 'package:frontend_sp2/ui/feature/menu/sales_performance/sales_performance_screen.dart';
+import 'package:frontend_sp2/ui/feature/profile/profile_screen.dart';
 
 import 'customer_retention/customer_retention_screen.dart';
 
@@ -74,6 +75,10 @@ class _MyMenuPageState extends State<MainMenuScreen> {
                   },
                   destinations: const <NavigationRailDestination>[
                     NavigationRailDestination(
+                      label: Text('Usuarios'),
+                      icon: Icon(Icons.person),
+                    ),
+                    NavigationRailDestination(
                       label: Text('Subir archivos'),
                       icon: Icon(Icons.upload_file),
                     ),
@@ -109,6 +114,7 @@ class _MyMenuPageState extends State<MainMenuScreen> {
                     child: PageView(
                       controller: pageController,
                       children: [
+                        const ProfileScreen(),
                         const FileUploadScreen(),
                         const SalesPerformanceScreen(),
                         const CustomerLifetimeValueScreen(),

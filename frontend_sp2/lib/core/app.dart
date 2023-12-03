@@ -5,8 +5,6 @@ import 'package:frontend_sp2/core/di/injector.dart';
 import 'package:frontend_sp2/core/theming/app_colors.dart';
 import 'package:frontend_sp2/core/theming/dimens.dart';
 
-
-
 class AppSp2 extends StatelessWidget {
   final AppRouter appRouter;
 
