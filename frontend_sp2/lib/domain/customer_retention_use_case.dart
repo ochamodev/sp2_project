@@ -1,10 +1,12 @@
 import 'package:fpdart/fpdart.dart';
 import 'package:frontend_sp2/core/formatting.dart';
 import 'package:frontend_sp2/data/customer_retention_caller.dart';
+import 'package:frontend_sp2/data/model/current_company_request.dart';
 import 'package:frontend_sp2/data/response/response_code.dart';
 import 'package:frontend_sp2/data/response/year_filters_response.dart';
 import 'package:frontend_sp2/data/response/year_filters_response_parent.dart';
 import 'package:frontend_sp2/data/year_filter_api_caller.dart';
+import 'package:frontend_sp2/domain/get_current_company_use_case.dart';
 import 'package:frontend_sp2/domain/model/customer_retention/customer_retention_item.dart';
 import 'package:frontend_sp2/domain/model/customer_retention/customer_retention_report_model.dart';
 import 'package:frontend_sp2/domain/model/customer_retention/customer_retention_report_model_elements.dart';
@@ -15,12 +17,19 @@ class CustomerRetentionUseCase {
   final Logger _logger;
   final CustomerRetentionCaller _customerRetentionCaller;
   final YearFilterApiCaller _yearFilterApiCaller;
+  final GetCurrentCompanyUseCase _getCurrentCompanyUseCase;
   CustomerRetentionUseCase(this._logger, this._customerRetentionCaller,
-      this._yearFilterApiCaller);
+      this._yearFilterApiCaller, this._getCurrentCompanyUseCase);
 
   Future<Either<ResponseCode, CustomerRetentionReportModel>> call() async {
-    var callResult = await _customerRetentionCaller.getCustomerRetention();
-    var yearFilterResult = await _yearFilterApiCaller.getYearFilters();
+    var company = await _getCurrentCompanyUseCase();
+    var currentCompanyRequest = CurrentCompanyRequest(currentCompany: company);
+    var callResult = await _customerRetentionCaller.getCustomerRetention(
+      currentCompanyRequest
+    );
+    var yearFilterResult = await _yearFilterApiCaller.getYearFilters(
+      currentCompanyRequest
+    );
     Either<ResponseCode, CustomerRetentionReportModel> response =
     callResult.match((error) {
       return Either.left(error);

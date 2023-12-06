@@ -1,7 +1,9 @@
 import 'package:fpdart/fpdart.dart';
+import 'package:frontend_sp2/data/model/current_company_request.dart';
 import 'package:frontend_sp2/data/response/monthly_sales_per_year.dart';
 import 'package:frontend_sp2/data/response/response_code.dart';
 import 'package:frontend_sp2/data/response/sales_performance_report_response.dart';
+import 'package:frontend_sp2/domain/get_current_company_use_case.dart';
 import 'package:frontend_sp2/domain/model/sales_performance_elements_model.dart';
 import 'package:frontend_sp2/domain/model/sales_performance_report_model.dart';
 import 'package:frontend_sp2/domain/model/year_filter_model.dart';
@@ -10,12 +12,17 @@ import '../data/sales_performance_caller.dart';
 
 class SalesPerformanceUseCase {
   final SalesPerformanceCaller _salesPerformanceCaller;
+  final GetCurrentCompanyUseCase _getCurrentCompanyUseCase;
 
-  SalesPerformanceUseCase(this._salesPerformanceCaller);
+  SalesPerformanceUseCase(this._salesPerformanceCaller, this._getCurrentCompanyUseCase);
 
   Future<Either<ResponseCode, SalesPerformanceReportModel>> call() async {
-    var callResult = await _salesPerformanceCaller.getSalesPerformance();
+    var company = await _getCurrentCompanyUseCase();
+    var currentCompanyRequest = CurrentCompanyRequest(currentCompany: company);
 
+    var callResult = await _salesPerformanceCaller.getSalesPerformance(
+      currentCompanyRequest
+    );
     Either<ResponseCode, SalesPerformanceReportModel> response =
         callResult.match((l) {
       return Either.left(l);

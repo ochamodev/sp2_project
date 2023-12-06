@@ -7,6 +7,7 @@ from data.models.db_models import db, DTEDocument, EmitterDTE, DTEReceptor, Esta
 from domain.dte_excel_keys import DTEExcelKeys
 from domain.dto.base_response_dto import BaseResponseDTO
 from domain.dto.sales_performance_dto import SalesPerformanceDTO, MonthlySalesPerYearItemDTO, SalesPerformanceItemDTO, YearFilterDTO, MonthlyStandardDeviationDTO
+from domain.dto.selected_company_dto import SelectedCompanyDTO
 
 
 def get_billing_years_use_case(companyCode: int):

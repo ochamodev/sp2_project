@@ -8,8 +8,14 @@ from data.models.db_models import PlatformUser
 def validate_login_use_case(logindto: LoginDTO):
     user: PlatformUser = PlatformUser.query.filter_by(
         userEmail=logindto.email).first()
-    if user and bcrypt.checkpw(logindto.password.encode('utf-8'), user.userPassword.encode('utf-8')):
-        return True, user.nitEmitter
+    passwordMatches = bcrypt.checkpw(logindto.password.encode(
+        'utf-8'), user.userPassword.encode('utf-8'))
+    if user and passwordMatches:
+        emitters = []
+        for emitter in user.emittersDTE:
+            print(emitter.idEmitterDte)
+            emitters.append(emitter.idEmitterDte)
+        return True, emitters
     return False, None
 
 

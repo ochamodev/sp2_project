@@ -1,10 +1,13 @@
 import 'package:fpdart/fpdart.dart';
 import 'package:frontend_sp2/core/formatting.dart';
 import 'package:frontend_sp2/data/customer_lifetime_value_caller.dart';
+import 'package:frontend_sp2/data/model/current_company_request.dart';
 import 'package:frontend_sp2/data/response/response_code.dart';
 import 'package:frontend_sp2/data/response/year_filters_response.dart';
 import 'package:frontend_sp2/data/response/year_filters_response_parent.dart';
 import 'package:frontend_sp2/data/year_filter_api_caller.dart';
+import 'package:frontend_sp2/domain/get_companies_use_case.dart';
+import 'package:frontend_sp2/domain/get_current_company_use_case.dart';
 import 'package:frontend_sp2/domain/model/customer_lifetime_value/customer_lifetime_value_item.dart';
 import 'package:frontend_sp2/domain/model/customer_lifetime_value/customer_lifetime_value_report_model.dart';
 import 'package:frontend_sp2/domain/model/customer_lifetime_value/customer_lifetime_value_report_model_elements.dart';
@@ -16,12 +19,17 @@ class CustomerLifetimeValueUseCase {
   final Logger _logger;
   final CustomerLifetimeValueCaller _customerLifetimeValueCaller;
   final YearFilterApiCaller _yearFilterApiCaller;
+  final GetCurrentCompanyUseCase _getCurrentCompanyUseCase;
   CustomerLifetimeValueUseCase(this._logger, this._customerLifetimeValueCaller,
-      this._yearFilterApiCaller);
+      this._yearFilterApiCaller, this._getCurrentCompanyUseCase);
 
   Future<Either<ResponseCode, CustomerLifetimeValueReportModel>> call() async {
-    var callResult = await _customerLifetimeValueCaller.getCustomerValue();
-    var yearFilterResult = await _yearFilterApiCaller.getYearFilters();
+    var company = await _getCurrentCompanyUseCase();
+    var currentCompanyRequest = CurrentCompanyRequest(currentCompany: company);
+    var callResult = await _customerLifetimeValueCaller.getCustomerValue(
+        currentCompanyRequest
+    );
+    var yearFilterResult = await _yearFilterApiCaller.getYearFilters(currentCompanyRequest);
     Either<ResponseCode, CustomerLifetimeValueReportModel> response =
         callResult.match((error) {
       return Either.left(error);

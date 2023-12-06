@@ -76,6 +76,19 @@ BEGIN
 END $$
 DELIMITER ;
 
+DROP PROCEDURE IF EXISTS GetUsersInCompany;
+DELIMITER $$
+CREATE PROCEDURE GetUsersInCompany(
+    IN emitterId INT
+)
+BEGIN
+    SELECT p.* FROM platformuser AS p
+        INNER JOIN emitterplatformuser AS epu
+        ON epu.idUser = p.idUser
+        WHERE epu.nitEmitter = emitterId;
+END $$
+DELIMITER ;
+
 CALL StandardDeviationPerMonthByYear(1, 2023);
 CALL TotalSalesPerMonthByYear(1, 2022);
 CALL GetSalesPerformance(1);

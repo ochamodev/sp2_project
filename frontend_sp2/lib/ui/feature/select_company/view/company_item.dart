@@ -15,31 +15,36 @@ class CompanyItem extends StatelessWidget {
       width: 50,
       child: Card(
         elevation: 3,
-        child: Column(
-          children: [
-            Image.asset(
-              ImgPaths.buildingIcon,
-              height: 200,
-              width: 200,
-            ),
-            Flexible(
-              child: Text(
-                model.companyName,
-                style: Theme.of(context).textTheme.headline5,
+        child: InkWell(
+          child: Column(
+            children: [
+              Image.asset(
+                ImgPaths.buildingIcon,
+                height: 200,
+                width: 200,
               ),
-            ),
-            Flexible(
-              child: RichText(
-                text: TextSpan(
-                  text: "NIT: ",
-                  style: Theme.of(context).textTheme.headline6,
-                  children: <TextSpan>[
-                    TextSpan(text: model.nit),
-                  ]
-                )
+              Flexible(
+                child: Text(
+                  model.companyName,
+                  style: Theme.of(context).textTheme.headline5,
+                ),
               ),
-            )
-          ],
+              Flexible(
+                child: RichText(
+                  text: TextSpan(
+                    text: "NIT: ",
+                    style: Theme.of(context).textTheme.bodyLarge,
+                    children: <TextSpan>[
+                      TextSpan(text: model.nit),
+                    ]
+                  )
+                ),
+              )
+            ],
+          ),
+          onTap: () {
+            onClick();
+          },
         ),
       ),
     );

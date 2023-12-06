@@ -11,7 +11,7 @@ from flask_jwt_extended import JWTManager
 
 def create_application():
     app = Flask(__name__)
-    app.config["SQLALCHEMY_DATABASE_URI"] = "mysql+mysqlconnector://root:root@localhost:3306/proyectosp2"
+    app.config["SQLALCHEMY_DATABASE_URI"] = "mariadb+mariadbconnector://root:root@localhost:3308/proyectosp2"
     app.config["SQLALCHEMY_POOL_RECYCLE"] = 280
 
     # Setup the Flask-JWT-Extended extension

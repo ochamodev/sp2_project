@@ -33,12 +33,21 @@ class DTEReceptor(db.Model):
     dte_documents = db.relationship('DTEDocument', backref="dteReceptor")
 
 
+emitterPlatformUser = db.Table(
+    'EmitterPlatformUser',
+    db.Column('idUser', db.Integer, db.ForeignKey('PlatformUser.idUser')),
+    db.Column('nitEmitter', db.Integer,
+              db.ForeignKey('EmitterDTE.idEmitterDte'))
+)
+
+
 class EmitterDTE(db.Model):
     __tablename__ = "EmitterDTE"
     idEmitterDte = db.Column(db.Integer, primary_key=True)
     nit = db.Column(db.String(25), nullable=False)
     nameEmitter = db.Column(db.String(255), nullable=False)
-    platformUsers = db.relationship('PlatformUser', backref='emitterDTE')
+    platformUsers = db.relationship(
+        'PlatformUser', secondary=emitterPlatformUser, backref='emitterDTE')
     establishments = db.relationship('Establishment', backref="emitterDTE")
 
 
@@ -58,13 +67,12 @@ class Establishment(db.Model):
 class PlatformUser(db.Model):
     __tablename__ = "PlatformUser"
     idUser = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    nitEmitter = db.Column(
-        db.Integer, db.ForeignKey('EmitterDTE.idEmitterDte'), nullable=False
-    )
     userName = db.Column(db.String(255), nullable=False)
     userLastName = db.Column(db.String(255), nullable=False)
     userEmail = db.Column(db.String(255), nullable=False)
     userPassword = db.Column(db.String(255), nullable=False)
+    emittersDTE = db.relationship(
+        'EmitterDTE', secondary=emitterPlatformUser, backref='platformUser')
 
 
 class DTEDocument(db.Model):

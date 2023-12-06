@@ -2,6 +2,7 @@
 import 'package:dio/dio.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:frontend_sp2/core/network_call_methods.dart';
+import 'package:frontend_sp2/data/base_model.dart';
 import 'package:frontend_sp2/data/response/base_response.dart';
 import 'package:frontend_sp2/data/response/response_code.dart';
 import 'package:frontend_sp2/data/response/sales_performance_report_response.dart';
@@ -19,10 +20,10 @@ class YearFilterApiCaller {
     required this.logger
   });
 
-  Future<Either<ResponseCode, YearFiltersResponseParent>> getYearFilters() async {
+  Future<Either<ResponseCode, YearFiltersResponseParent>> getYearFilters(BaseModel model) async {
     try {
       var url = NetworkCallMethods.yearFilters;
-      var result = await dio.post(url);
+      var result = await dio.post(url, data: model.toJson());
       logger.d("url: $url");
       logger.d("response: ${result.data}");
       final response = BaseResponse.fromJson(result.data);

@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:frontend_sp2/core/network_call_methods.dart';
 import 'package:frontend_sp2/data/base_api_caller.dart';
+import 'package:frontend_sp2/data/base_model.dart';
 import 'package:frontend_sp2/data/response/base_response.dart';
 import 'package:frontend_sp2/data/response/response_code.dart';
 import 'package:frontend_sp2/data/response/sales_performance_elements.dart';
@@ -20,10 +21,10 @@ class SalesPerformanceCaller{
     required this.logger,
   });
 
-  Future<Either<ResponseCode, SalesPerformanceReportResponse>> getSalesPerformance() async {
+  Future<Either<ResponseCode, SalesPerformanceReportResponse>> getSalesPerformance(BaseModel model) async {
     try {
       var url = NetworkCallMethods.salesPerformance;
-      var result = await dio.post(url);
+      var result = await dio.post(url, data: model.toJson());
       logger.d("url: $url");
       logger.d("response: ${result.data}");
       final response = BaseResponse.fromJson(result.data);

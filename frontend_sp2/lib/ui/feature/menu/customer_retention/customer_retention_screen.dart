@@ -55,7 +55,6 @@ class CustomerRetentionBody extends StatelessWidget {
                     Flexible(
                       child: ListView.builder(
                         itemCount: model.reportList.length,
-
                         itemBuilder: (context, index) {
                           var item = model.reportList[index];
                           return Card(

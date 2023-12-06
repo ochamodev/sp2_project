@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:frontend_sp2/core/network_call_methods.dart';
+import 'package:frontend_sp2/data/base_model.dart';
 import 'package:frontend_sp2/data/response/customer_retention_response.dart';
 import 'package:frontend_sp2/data/response/response_code.dart';
 import 'package:frontend_sp2/domain/model/sales_performance_report_model.dart';
@@ -17,10 +18,10 @@ class CustomerRetentionCaller {
     required this.logger
   });
 
-  Future<Either<ResponseCode, CustomerRetentionResponse>> getCustomerRetention() async {
+  Future<Either<ResponseCode, CustomerRetentionResponse>> getCustomerRetention(BaseModel model) async {
     try {
       var url = NetworkCallMethods.customerRetention;
-      var result = await dio.post(url);
+      var result = await dio.post(url, data: model.toJson());
       logger.d("url: $url");
       logger.d("response: ${result.data}");
       final response = BaseResponse.fromJson(result.data);

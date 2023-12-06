@@ -11,11 +11,10 @@ class MainMenuGuard extends AutoRouteGuard {
   @override
   void onNavigation(NavigationResolver resolver, StackRouter router) async {
     bool authenticated = await _useCase.isUserAuthenticated();
-
     if (authenticated) {
       resolver.next(true);
     } else {
-      resolver.redirect(const HomeRoute());
+      resolver.redirect(const SelectCompanyRoute());
     }
 
   }

@@ -2,6 +2,7 @@
 import 'package:dio/dio.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:frontend_sp2/core/network_call_methods.dart';
+import 'package:frontend_sp2/data/base_model.dart';
 import 'package:frontend_sp2/data/response/customer_lifetime_value_response.dart';
 import 'package:frontend_sp2/data/response/response_code.dart';
 import 'package:frontend_sp2/domain/model/sales_performance_report_model.dart';
@@ -18,10 +19,10 @@ class CustomerLifetimeValueCaller {
     required this.logger
 });
 
-  Future<Either<ResponseCode, CustomerLifetimeValueResponse>> getCustomerValue() async {
+  Future<Either<ResponseCode, CustomerLifetimeValueResponse>> getCustomerValue(BaseModel model) async {
     try {
       var url = NetworkCallMethods.customerLifetimeValue;
-      var result = await dio.post(url);
+      var result = await dio.post(url, data: model.toJson());
       logger.d("url: $url");
       logger.d("response: ${result.data}");
       final response = BaseResponse.fromJson(result.data);

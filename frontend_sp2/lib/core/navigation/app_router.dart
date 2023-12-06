@@ -25,7 +25,8 @@ class AppRouter extends _$AppRouter {
     ),
     AutoRoute(
       path: Routes.selectCompany,
-      page: SelectCompanyRoute.page
+      page: SelectCompanyRoute.page,
+      guards: [getIt<MainMenuGuard>()]
     ),
     AutoRoute(
       path: Routes.mainMenu,

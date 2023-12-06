@@ -15,13 +15,12 @@ INSERT INTO responseCodes(respCode, respDescription)
 
 INSERT INTO responseCodes(respCode, respDescription)
 	VALUES('U4','La cuenta ya existe');
-    
+
+INSERT INTO responseCodes(respCode, respDescription)
+VALUES('U5','No se pudo realizar el cambio de contraseña');
+
+INSERT INTO responseCodes(respCode, respDescription)
+VALUES('U6','No tiene acceso a esa empresa');
+
 INSERT INTO responseCodes(respCode, respDescription)
 	VALUES('E0','Ya se registro la empresa con ese NIT');
-
-
-INSERT INTO proyectosp2.dtedocumentestatus(idDteDocumentEstatus, descriptionEstatus)
-	VALUES(1, 'Vigente');
-    
-INSERT INTO proyectosp2.dtedocumentestatus(idDteDocumentEstatus, descriptionEstatus)
-	VALUES(2, 'Anulado');

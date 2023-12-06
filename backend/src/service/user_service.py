@@ -1,12 +1,15 @@
 from flask import jsonify
 from flask_restx import Namespace, Resource, fields
-from flask_jwt_extended import jwt_required, create_access_token
+from flask_jwt_extended import jwt_required, create_access_token, get_jwt_identity
 from domain.dto.base_response_dto import BaseResponseDTO
 from domain.dto.register_dto import RegisterDTO
 from domain.dto.login_dto import LoginDTO
+from domain.dto.change_password_dto import ChangePasswordDTO
 from domain.create_user_use_case import createUserUseCase
+from domain.change_password_use_case import change_password_use_case
 from domain.check_if_user_exists_use_case import validate_login_use_case
 from domain.get_response_code_use_case import get_response_code_data
+from domain.get_companies_use_case import get_companies_use_case
 from domain.response_codes import ResponseCodes
 
 
@@ -24,6 +27,11 @@ registerUserModel = api.model('RegisterUserModel', {
     'lastName': fields.String(required=True),
     'nitEmpresa': fields.String(required=True),
     'nameEmpresa': fields.String(required=True)
+})
+
+changePasswordModel = api.model('ChangePasswordModel', {
+    'oldPassword': fields.String(required=True),
+    'newPassword': fields.String(required=True)
 })
 
 
@@ -69,4 +77,23 @@ class ProtectedResource(Resource):
         return {'message': 'I am a protected resource'}
 
 
+@api.route('/changePassword')
+class ChangePasswordResource(Resource):
+    @jwt_required()
+    @api.expect(changePasswordModel)
+    def post(self):
+        changePasswordDTO = ChangePasswordDTO.Schema().load(api.payload)
+        userEmail = get_jwt_identity()
+        response = change_password_use_case(
+            userEmail=userEmail, change_password_dto=changePasswordDTO)
+        return BaseResponseDTO.Schema().dump(response)
 # comparación de años
+
+
+@api.route('/getCompanies')
+class GetCompaniesResource(Resource):
+    @jwt_required()
+    def post(self):
+        userEmail = get_jwt_identity()
+        response = get_companies_use_case(userEmail)
+        return BaseResponseDTO.Schema().dump(response)
