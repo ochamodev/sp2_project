@@ -91,14 +91,6 @@ class _UsersScreenBody extends StatelessWidget {
                   ),
                 ),
               ),
-              DataColumn(
-                label: Expanded(
-                  child: Text(
-                    'Acciones',
-                    style: TextStyle(fontStyle: FontStyle.italic),
-                  ),
-                ),
-              ),
             ],
             rows: const <DataRow>[
               DataRow(
