@@ -17,7 +17,7 @@ extension Explanation on TextFieldInputError {
   String text() {
     switch (this) {
       case TextFieldInputError.empty:
-        return 'El campo no puede ir vacio';
+        return 'Campo inválido.';
     }
   }
 }
