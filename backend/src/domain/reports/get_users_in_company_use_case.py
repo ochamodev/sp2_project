@@ -22,6 +22,6 @@ def get_users_in_company(companyCode: int):
                               userLastName=userLastName, userEmail=userEmail)
             companyUsersModel.append(userDto)
 
-        return BaseResponseDTO(success=True, data={'filters': companyUsersModel})
+        return BaseResponseDTO(success=True, data={'users': companyUsersModel})
     finally:
         connection.close()
