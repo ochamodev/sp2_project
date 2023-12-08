@@ -1,6 +1,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:frontend_sp2/core/theming/app_colors.dart';
 import 'package:frontend_sp2/domain/user_model.dart';
 import 'package:frontend_sp2/ui/feature/menu/users/view/user_list_item.dart';
 
@@ -9,7 +10,9 @@ class UsersScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return _UsersScreenBody();
+    return Container(
+      child: _UsersScreenBody(),
+    );
   }
 
 }
@@ -17,7 +20,7 @@ class UsersScreen extends StatelessWidget {
 class _UsersScreenBody extends StatelessWidget {
 
   final List<UserModel> items = [
-    UserModel(
+    const UserModel(
         idUser: 1,
         userName: "Otto Francisco",
         userLastName: "Chamo Cheley",
@@ -31,8 +34,8 @@ class _UsersScreenBody extends StatelessWidget {
     ),
     UserModel(
         idUser: 3,
-        userName: "Diana",
-        userLastName: "Palencia",
+        userName: "Axel",
+        userLastName: "Benavides",
         userEmail: "cheleyotto98@gmail.com"
     ),
 
@@ -62,57 +65,57 @@ class _UsersScreenBody extends StatelessWidget {
     );*/
 
     return SizedBox(
+      width: mediaQuery.size.width,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 32),
         child: SingleChildScrollView(
-          child: DataTable(
-            columns: const <DataColumn>[
-              DataColumn(
-                label: Expanded(
-                  child: Text(
-                    'Name',
-                    style: TextStyle(fontStyle: FontStyle.italic),
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Text(
+                "Administración de usuarios",
+                style: Theme.of(context).textTheme.headline4,
+              ),
+              ElevatedButton(
+                onPressed: () {  },
+                child: const Text("Agregar usuario"),
+              ),
+              DataTable(
+                columns: const <DataColumn>[
+                  DataColumn(
+                    label: Expanded(
+                      child: Text(
+                        'Nombres',
+                        style: TextStyle(fontStyle: FontStyle.italic),
+                      ),
+                    ),
                   ),
-                ),
-              ),
-              DataColumn(
-                label: Expanded(
-                  child: Text(
-                    'Age',
-                    style: TextStyle(fontStyle: FontStyle.italic),
+                  DataColumn(
+                    label: Expanded(
+                      child: Text(
+                        'Apellidos',
+                        style: TextStyle(fontStyle: FontStyle.italic),
+                      ),
+                    ),
                   ),
-                ),
-              ),
-              DataColumn(
-                label: Expanded(
-                  child: Text(
-                    'Role',
-                    style: TextStyle(fontStyle: FontStyle.italic),
+                  DataColumn(
+                    label: Expanded(
+                      child: Text(
+                        'Correo',
+                        style: TextStyle(fontStyle: FontStyle.italic),
+                      ),
+                    ),
                   ),
-                ),
-              ),
-            ],
-            rows: const <DataRow>[
-              DataRow(
-                cells: <DataCell>[
-                  DataCell(Text('Sarah')),
-                  DataCell(Text('19')),
-                  DataCell(Text('Student')),
+                  DataColumn(
+                    label: Expanded(
+                      child: Text(
+                        'Acciones',
+                        style: TextStyle(fontStyle: FontStyle.italic),
+                      ),
+                    ),
+                  ),
                 ],
-              ),
-              DataRow(
-                cells: <DataCell>[
-                  DataCell(Text('Janine')),
-                  DataCell(Text('43')),
-                  DataCell(Text('Professor')),
-                ],
-              ),
-              DataRow(
-                cells: <DataCell>[
-                  DataCell(Text('William')),
-                  DataCell(Text('27')),
-                  DataCell(Text('Associate Professor')),
-                ],
+                rows: items.map((e) => getRows(e)).toList(),
               ),
             ],
           ),
@@ -120,6 +123,41 @@ class _UsersScreenBody extends StatelessWidget {
       ),
     );
 
+
+  }
+
+  DataRow getRows(UserModel userModel) {
+    return DataRow(
+      cells: <DataCell>[
+        DataCell(Text(userModel.userName)),
+        DataCell(Text(userModel.userLastName)),
+        DataCell(Text(userModel.userEmail)),
+        DataCell(
+          Row(
+            children: [
+              ElevatedButton(
+                onPressed: () {
+
+                },
+                child: Text("Editar"),
+              ),
+              const SizedBox(
+                width: 5,
+              ),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppColors.defaultRedColor
+                ),
+                onPressed: () {
+
+                },
+                child: Text("Eliminar"),
+              )
+            ],
+          )
+        ),
+      ]
+    );
   }
 
 }

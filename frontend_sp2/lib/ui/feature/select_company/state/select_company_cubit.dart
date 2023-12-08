@@ -34,4 +34,5 @@ class SelectCompanyScreenState with _$SelectCompanyScreenState {
   factory SelectCompanyScreenState.initial(
       List<CompanyItemModel> companies
   ) = _Initial;
+  factory SelectCompanyScreenState.empty() = _Empty;
 }

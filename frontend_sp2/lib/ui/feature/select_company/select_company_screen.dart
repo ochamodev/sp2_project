@@ -36,43 +36,19 @@ class _SelectScreenBody extends StatelessWidget {
             loading: () {
               return const LinearProgressIndicator();
             },
+            empty: () {
+              return Center(
+                child: Text(
+                  "No tienes empresas asignadas",
+                  style: Theme.of(context).textTheme.headline5,
+                ),
+              );
+            },
             initial: (List<CompanyItemModel> items) {
-              return SizedBox(
-                height: mediaQuery.height,
-                child: Padding(
-                  padding: const EdgeInsets.all(80.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        "Selecciona que empresa quieres consultar:",
-                        style: Theme.of(context).textTheme.headlineLarge?.copyWith(color: Colors.black),
-                      ),
-                      const SizedBox(
-                        height: Dimens.itemSeparationHeight,
-                      ),
-                      Flexible(
-                        child: GridView.builder(
-                          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
-                            mainAxisExtent: mediaQuery.height * 0.30,
-                          ),
-                          itemCount: items.length,
-                          itemBuilder: (context, index) {
-                            var item = items[index];
-                            return CompanyItem(
-                                model: item,
-                                onClick: () {
-                                  context.read<SelectCompanyCubit>()
-                                      .storeCurrentSelectedCompany(item.id);
-                                  AutoRouter.of(context).navigate(const MainMenuRoute());
-                                }
-                            );
-                          },
-                        ),
-                      )
-                    ],
-                  ),
+              return  Center(
+                child: Text(
+                  "No estas asignado a una compañia de momento :(",
+                  style: Theme.of(context).textTheme.headline5,
                 ),
               );
             }

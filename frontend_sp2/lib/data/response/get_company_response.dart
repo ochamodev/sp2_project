@@ -14,7 +14,6 @@ class GetCompanyResponse {
     required this.nit,
     required this.nameEmitter
 });
-
   factory GetCompanyResponse.fromJson(Map<String, dynamic> json) =>
       _$GetCompanyResponseFromJson(json);
 }
