@@ -1,6 +1,8 @@
 from flask import jsonify
 from flask_restx import Namespace, Resource, fields
 from flask_jwt_extended import jwt_required, get_jwt
+from domain.dto.rfc_dto import RFCDTO
+from domain.reports.get_rfc_use_case import get_rfc_analysis_use_case
 from domain.dto.base_response_dto import BaseResponseDTO
 from domain.get_response_code_use_case import get_response_code_use_case
 from domain.reports.get_customer_lifetime_value_use_case import get_customer_lifetime_value_use_case
@@ -89,6 +91,21 @@ class CustomerRetentionRate(Resource):
         else:
             return returnData
 
+@api.route('/rfmAnalysis')
+class RFCAnalysis(Resource):
+    @api.doc('RFMAnalysis')
+    @api.expect(currentCompanyModel)
+    @jwt_required()
+    def post(self):
+        claims = get_jwt()
+        current_company: SelectedCompanyDTO = SelectedCompanyDTO.Schema().load(api.payload)
+        return_data = validateIfUserHasAccess(
+            items=claims, currentCompany=current_company)
+        if return_data is not None:
+            result = get_rfc_analysis_use_case(current_company.currentCompany)
+            return jsonify(result)
+        else:
+            return return_data
 
 @api.route('/yearFilters')
 class YearFiltersCompany(Resource):

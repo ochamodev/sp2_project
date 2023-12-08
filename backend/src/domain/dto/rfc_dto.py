@@ -8,7 +8,7 @@ from marshmallow import Schema
 class RFCItemDTO:
     idReceptor: int
     name: str
-    amount: Decimal
+    # amount: Decimal
     rfm_score: Decimal
     recency: Decimal
     frequency: Decimal
@@ -19,5 +19,7 @@ class RFCItemDTO:
 
 @dataclass
 class RFCDTO:
-    rfcItems: Dict
+    premium: List[RFCItemDTO]
+    potential: List[RFCItemDTO]
+    sporadic: List[RFCItemDTO]
     Schema: ClassVar[Type[Schema]] = Schema

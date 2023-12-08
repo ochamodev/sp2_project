@@ -7,5 +7,6 @@ abstract class NetworkCallMethods {
   static const String salesPerformance = "/reports/salesPerformance";
   static const String customerLifetimeValue = "/reports/customerLifetimeValue";
   static const String customerRetention = "/reports/customerRetention";
+  static const String rfmAnalysis = "/reports/rfmAnalysis";
   static const String yearFilters = "/reports/yearFilters";
 }

@@ -15,8 +15,8 @@ class CustomerLifetimeValueReportModelElements extends Equatable {
     required this.clientCount,
     required this.purchaseRate,
     required this.purchaseValue,
-    required this.quantity, required
-    this.yearT
+    required this.quantity,
+    required this.yearT
   });
 
   @override
