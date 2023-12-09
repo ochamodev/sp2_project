@@ -19,9 +19,9 @@ class GetUsersInCompanyCaller {
     required this.logger
   });
 
-  Future<Either<ResponseCode, GetUsersResponse>> getSalesPerformance(BaseModel model) async {
+  Future<Either<ResponseCode, GetUsersResponse>> getUsersInCompany(BaseModel model) async {
     try {
-      var url = NetworkCallMethods.salesPerformance;
+      var url = NetworkCallMethods.getUsersInCompany;
       var result = await dio.post(url, data: model.toJson());
       logger.d("url: $url");
       logger.d("response: ${result.data}");

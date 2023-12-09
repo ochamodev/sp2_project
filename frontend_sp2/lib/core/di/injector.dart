@@ -9,6 +9,7 @@ import 'package:frontend_sp2/data/customer_lifetime_value_caller.dart';
 import 'package:frontend_sp2/data/customer_retention_caller.dart';
 import 'package:frontend_sp2/data/file_upload_caller.dart';
 import 'package:frontend_sp2/data/get_companies_caller.dart';
+import 'package:frontend_sp2/data/get_users_in_company_caller.dart';
 import 'package:frontend_sp2/data/year_filter_api_caller.dart';
 import 'package:frontend_sp2/domain/customer_lifetime_value_use_case.dart';
 import 'package:frontend_sp2/domain/file_upload_use_case.dart';
@@ -57,6 +58,7 @@ Future<void> initializeInjectedDependencies() async {
   getIt.registerSingleton(CustomerLifetimeValueCaller(dio: getIt(), logger: getIt()));
   getIt.registerSingleton(CustomerRetentionCaller(dio: getIt(), logger: getIt()));
   getIt.registerSingleton(GetCompaniesCaller(dio: getIt(), logger: getIt()));
+  getIt.registerSingleton(GetUsersInCompanyCaller(dio: getIt(), logger: getIt()));
   // use cases
   getIt.registerSingleton(LoginUseCase(getIt()));
   getIt.registerSingleton(GetCurrentCompanyUseCase(getIt()));

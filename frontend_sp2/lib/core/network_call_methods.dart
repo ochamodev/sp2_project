@@ -5,6 +5,7 @@ abstract class NetworkCallMethods {
   static const String getCompanies = "/user/getCompanies";
   static const String fileUpload = "/fileUpload/upload";
   static const String salesPerformance = "/reports/salesPerformance";
+  static const String getUsersInCompany = "/reports/getUsersInCompany";
   static const String customerLifetimeValue = "/reports/customerLifetimeValue";
   static const String customerRetention = "/reports/customerRetention";
   static const String rfmAnalysis = "/reports/rfmAnalysis";
