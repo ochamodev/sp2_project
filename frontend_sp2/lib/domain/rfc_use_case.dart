@@ -12,17 +12,24 @@ import 'package:frontend_sp2/domain/model/rfc/rfc_summary_card_model.dart';
 import 'package:frontend_sp2/domain/model/year_filter_model.dart';
 import 'package:logger/logger.dart';
 import 'package:intl/intl.dart';
-
+import 'package:frontend_sp2/data/model/current_company_request.dart';
+import 'package:frontend_sp2/domain/get_companies_use_case.dart';
+import 'package:frontend_sp2/domain/get_current_company_use_case.dart';
 
 class RFCUseCase {
   final Logger _logger;
   final RFCCaller _rfcCaller;
   final YearFilterApiCaller _yearFilterApiCaller;
+  final GetCurrentCompanyUseCase _getCurrentCompanyUseCase;
   RFCUseCase(this._logger, this._rfcCaller,
-      this._yearFilterApiCaller);
+      this._yearFilterApiCaller, this._getCurrentCompanyUseCase);
 
   Future<Either<ResponseCode, RFCReportModel>> call() async {
-    var callResult = await _rfcCaller.getRFC();
+    var company = await _getCurrentCompanyUseCase();
+    var currentCompanyRequest = CurrentCompanyRequest(currentCompany: company);
+    var callResult = await _rfcCaller.getRFC(
+        currentCompanyRequest
+    );
     // var yearFilterResult = await _yearFilterApiCaller.getYearFilters();
     Either<ResponseCode, RFCReportModel> response =
     callResult.match((error) {

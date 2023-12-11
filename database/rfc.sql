@@ -24,7 +24,7 @@ BEGIN
 		ON DTEReceptor.idDteReceptor = DteDocument.idReceptor
 	WHERE DteDocument.idDteDocumentEstatus = 1
 		AND Establishment.nitEmitter = emitterID
-		AND DTEReceptor.fullnameReceptor != "CONSUMIDOR FINAL";
+		AND DTEReceptor.fullnameReceptor != 'CONSUMIDOR FINAL';
 
 END $$
 

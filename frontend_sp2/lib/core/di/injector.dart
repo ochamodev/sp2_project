@@ -80,7 +80,7 @@ Future<void> initializeInjectedDependencies() async {
   getIt.registerSingleton(SalesPerformanceUseCase(getIt(), getIt()));
   getIt.registerSingleton(CustomerLifetimeValueUseCase(getIt(), getIt(), getIt(), getIt()));
   getIt.registerSingleton(CustomerRetentionUseCase(getIt(), getIt(), getIt(), getIt()));
-  getIt.registerSingleton(RFCUseCase(getIt(), getIt(), getIt()));
+  getIt.registerSingleton(RFCUseCase(getIt(), getIt(), getIt(), getIt()));
   getIt.registerSingleton(GetCompaniesUseCase(getIt()));
   getIt.registerSingleton(GetUsersInCompanyUseCase(getIt(), getIt()));
   getIt.registerSingleton(UserOperationsUseCase(getIt(), getIt()));

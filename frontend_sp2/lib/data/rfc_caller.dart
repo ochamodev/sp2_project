@@ -18,7 +18,7 @@ class RFCCaller {
     required this.logger,
   });
 
-  Future<Either<ResponseCode, RFCResponse>> getRFC() async {
+  Future<Either<ResponseCode, RFCResponse>> getRFC(BaseModel model) async {
     try {
       var url = NetworkCallMethods.rfmAnalysis;
       var result = await dio.post(url);

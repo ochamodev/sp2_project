@@ -91,14 +91,23 @@ class CustomerRetentionRate(Resource):
         else:
             return returnData
 
+
 @api.route('/rfmAnalysis')
 class RFCAnalysis(Resource):
     @api.doc('RFMAnalysis')
     @jwt_required()
     def post(self):
         claims = get_jwt()
-        result = get_rfc_analysis_use_case(claims['e'])
-        return jsonify(result)
+        currentCompany: SelectedCompanyDTO = SelectedCompanyDTO.Schema().load(api.payload)
+        returnData = validateIfUserHasAccess(
+            items=claims, currentCompany=currentCompany)
+        if returnData != None:
+            result = get_rfc_analysis_use_case(
+                currentCompany.currentCompany)
+            return jsonify(result)
+        else:
+            return returnData
+
 
 @api.route('/yearFilters')
 class YearFiltersCompany(Resource):
