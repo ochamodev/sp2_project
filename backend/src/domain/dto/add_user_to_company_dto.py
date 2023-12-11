@@ -5,8 +5,11 @@ from marshmallow import Schema
 
 
 @dataclass
-class ChangePasswordDTO:
+class AddUserToCompanyDTO:
     userEmail: str
-    oldPassword: str
-    newPassword: str
+    userName: str
+    userPassword: str
+    userLastName: str
+    searchByUser: bool
+    companyId: int
     Schema: ClassVar[Type[Schema]] = Schema

@@ -4,7 +4,6 @@ import 'package:frontend_sp2/core/network_call_methods.dart';
 import 'package:frontend_sp2/data/base_model.dart';
 import 'package:frontend_sp2/data/response/customer_retention_response.dart';
 import 'package:frontend_sp2/data/response/response_code.dart';
-import 'package:frontend_sp2/domain/model/sales_performance_report_model.dart';
 import 'package:logger/logger.dart';
 
 import 'response/base_response.dart';

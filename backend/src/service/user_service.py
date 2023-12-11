@@ -1,16 +1,22 @@
 from flask import jsonify
 from flask_restx import Namespace, Resource, fields
 from flask_jwt_extended import jwt_required, create_access_token, get_jwt_identity
+from domain.add_user_to_company_use_case import add_user_to_company_use_case
+from domain.delete_user_from_company_use_case import delete_user_from_company_use_case
+from domain.dto.add_user_to_company_dto import AddUserToCompanyDTO
 from domain.dto.base_response_dto import BaseResponseDTO
+from domain.dto.delete_user_from_company_dto import DeleteUserFromCompanyDTO
 from domain.dto.register_dto import RegisterDTO
 from domain.dto.login_dto import LoginDTO
 from domain.dto.change_password_dto import ChangePasswordDTO
 from domain.create_user_use_case import createUserUseCase
 from domain.change_password_use_case import change_password_use_case
 from domain.check_if_user_exists_use_case import validate_login_use_case
+from domain.dto.update_user_dto import UpdateUserDTO
 from domain.get_response_code_use_case import get_response_code_data
 from domain.get_companies_use_case import get_companies_use_case
 from domain.response_codes import ResponseCodes
+from domain.update_user_use_case import update_user_use_case
 
 
 api = Namespace('user', 'User operations')
@@ -31,7 +37,28 @@ registerUserModel = api.model('RegisterUserModel', {
 
 changePasswordModel = api.model('ChangePasswordModel', {
     'oldPassword': fields.String(required=True),
-    'newPassword': fields.String(required=True)
+    'newPassword': fields.String(required=True),
+    'userEmail': fields.String(required=True)
+})
+
+updateUserModel = api.model('UpdateUserModel', {
+    'userEmail': fields.String(required=True),
+    'userName': fields.String(required=True),
+    'userLastName': fields.String(required=True)
+})
+
+deleteUserFromCompany = api.model('DeleteUserFromCompanyModel', {
+    'userId': fields.Integer(required=True),
+    'companyId': fields.Integer(required=True)
+})
+
+addUserToCompanyModel = api.model('AddUserToCompanyModel', {
+    'userEmail': fields.String(required=True),
+    'userName': fields.String(required=True),
+    'userPassword': fields.String(required=True),
+    'userLastName': fields.String(required=True),
+    'searchByUser': fields.Boolean(required=True),
+    'companyId': fields.Integer(required=True),
 })
 
 
@@ -83,11 +110,47 @@ class ChangePasswordResource(Resource):
     @api.expect(changePasswordModel)
     def post(self):
         changePasswordDTO = ChangePasswordDTO.Schema().load(api.payload)
-        userEmail = get_jwt_identity()
         response = change_password_use_case(
-            userEmail=userEmail, change_password_dto=changePasswordDTO)
+            change_password_dto=changePasswordDTO)
         return BaseResponseDTO.Schema().dump(response)
 # comparación de años
+
+
+@api.route('/updateUser')
+class UpdateUserResource(Resource):
+    @jwt_required()
+    @api.expect(updateUserModel)
+    def post(self):
+        print(api.payload)
+        updateUserDTO = UpdateUserDTO.Schema().load(api.payload)
+        response = update_user_use_case(
+            updateUserDTO=updateUserDTO
+        )
+        return BaseResponseDTO.Schema().dump(response)
+
+
+@api.route('/removeUserFromCompany')
+class RemoveUserFromCompany(Resource):
+    @jwt_required()
+    @api.expect(deleteUserFromCompany)
+    def post(self):
+        deleteUserFromCompanyDTO = DeleteUserFromCompanyDTO.Schema().load(api.payload)
+        response = delete_user_from_company_use_case(
+            deleteUserFromCompanyDTO=deleteUserFromCompanyDTO
+        )
+        return BaseResponseDTO.Schema().dump(response)
+
+
+@api.route('/addUserToCompany')
+class AddUserToCompany(Resource):
+    @jwt_required()
+    @api.expect(addUserToCompanyModel)
+    def post(self):
+        addUserToCompanyDTO = AddUserToCompanyDTO.Schema().load(api.payload)
+        response = add_user_to_company_use_case(
+            addUserToCompanyDTO=addUserToCompanyDTO
+        )
+        return BaseResponseDTO.Schema().dump(response)
 
 
 @api.route('/getCompanies')

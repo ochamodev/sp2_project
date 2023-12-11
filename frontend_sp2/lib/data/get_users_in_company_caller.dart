@@ -4,11 +4,10 @@ import 'package:fpdart/fpdart.dart';
 import 'package:frontend_sp2/core/network_call_methods.dart';
 import 'package:frontend_sp2/data/base_model.dart';
 import 'package:frontend_sp2/data/response/get_users_response.dart';
-import 'package:frontend_sp2/data/response/sales_performance_report_response.dart';
 import 'package:logger/logger.dart';
 
-import 'response/base_response.dart';
-import 'response/response_code.dart';
+import 'package:frontend_sp2/data/response/base_response.dart';
+import 'package:frontend_sp2/data/response/response_code.dart';
 
 class GetUsersInCompanyCaller {
   final Dio dio;

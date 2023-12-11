@@ -2,15 +2,12 @@
 import 'package:dio/dio.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:frontend_sp2/core/network_call_methods.dart';
-import 'package:frontend_sp2/data/base_api_caller.dart';
 import 'package:frontend_sp2/data/base_model.dart';
 import 'package:frontend_sp2/data/response/base_response.dart';
 import 'package:frontend_sp2/data/response/response_code.dart';
-import 'package:frontend_sp2/data/response/sales_performance_elements.dart';
 import 'package:frontend_sp2/data/response/sales_performance_report_response.dart';
 import 'package:logger/logger.dart';
 
-import 'model/sales_performance_request.dart';
 
 class SalesPerformanceCaller{
   final Dio dio;

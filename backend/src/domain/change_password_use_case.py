@@ -9,8 +9,9 @@ from .get_response_code_use_case import get_response_code_data
 from .response_codes import ResponseCodes
 
 
-def change_password_use_case(userEmail: str, change_password_dto: ChangePasswordDTO):
+def change_password_use_case(change_password_dto: ChangePasswordDTO):
     try:
+        userEmail = change_password_dto.userEmail
         userExists = check_if_user_exists_use_case(userEmail)
         if userExists:
             # check old password matches.
