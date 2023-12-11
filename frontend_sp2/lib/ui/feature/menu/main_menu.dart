@@ -9,6 +9,7 @@ import 'package:frontend_sp2/ui/feature/menu/cubit/main_menu_cubit.dart';
 import 'package:frontend_sp2/ui/feature/menu/customer_lifetime_value/customer_lifetime_value_screen.dart';
 import 'package:frontend_sp2/ui/feature/menu/file_upload/file_upload_screen.dart';
 import 'package:frontend_sp2/ui/feature/menu/sales_performance/sales_performance_screen.dart';
+import 'package:frontend_sp2/ui/feature/menu/rfc/rfc_screen.dart';
 import 'package:frontend_sp2/ui/feature/menu/users/users_screen.dart';
 import 'package:frontend_sp2/ui/feature/profile/profile_screen.dart';
 
@@ -50,7 +51,7 @@ class _MyMenuPageState extends State<MainMenuScreen> {
           final mediaQuery = MediaQuery.of(context);
           return Scaffold(
             appBar: AppBar(
-              title: const Text("Menu principal"),
+              title: const Text("Prometeus Analytics"),
               centerTitle: true,
             ),
             body: Row(
@@ -97,6 +98,10 @@ class _MyMenuPageState extends State<MainMenuScreen> {
                       // icon: Icon(Icons.wifi_protected_setup),
                     ),
                     NavigationRailDestination(
+                      label: Text('Segmentación de Clientes'),
+                      icon: Icon(Icons.safety_divider),
+                    ),
+                    NavigationRailDestination(
                       label: Text('Cerrar sesión'),
                       icon: Icon(Icons.exit_to_app),
                     ),
@@ -120,6 +125,7 @@ class _MyMenuPageState extends State<MainMenuScreen> {
                         const SalesPerformanceScreen(),
                         const CustomerLifetimeValueScreen(),
                         const CustomerRetentionScreen(),
+                        const RFCScreen(),
                         Center(
                           child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,

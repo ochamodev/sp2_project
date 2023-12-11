@@ -9,25 +9,22 @@ class RFCItemResponse {
   final int idReceptor;
   @JsonKey(name: "name")
   final String name;
-  @JsonKey(name: "amount")
-  final String amount;
-  @JsonKey(name: "rfm_score")
-  final String rfmScore;
+  @JsonKey(name: "rfmScore")
+  final double rfmScore;
   @JsonKey(name: "recency")
-  final String recency;
+  final double recency;
   @JsonKey(name: "frequency")
-  final String frequency;
+  final double frequency;
   @JsonKey(name: "monetary")
-  final String monetary;
+  final double monetary;
   @JsonKey(name: "cluster")
   final int cluster;
-  @JsonKey(name: "cluster_name")
+  @JsonKey(name: "clusterName")
   final String clusterName;
 
   RFCItemResponse({
     required this.idReceptor,
     required this.name,
-    required this.amount,
     required this.rfmScore,
     required this.recency,
     required this.frequency,

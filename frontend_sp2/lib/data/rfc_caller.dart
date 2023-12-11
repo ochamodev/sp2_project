@@ -1,12 +1,13 @@
+
 import 'package:dio/dio.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:frontend_sp2/core/network_call_methods.dart';
 import 'package:frontend_sp2/data/base_model.dart';
+import 'package:frontend_sp2/data/response/base_response.dart';
 import 'package:frontend_sp2/data/response/rfc_response.dart';
 import 'package:frontend_sp2/data/response/response_code.dart';
 import 'package:logger/logger.dart';
 
-import 'response/base_response.dart';
 
 class RFCCaller {
   final Dio dio;
@@ -17,10 +18,10 @@ class RFCCaller {
     required this.logger,
   });
 
-  Future<Either<ResponseCode, RFCResponse>> getRFC(BaseModel model) async {
+  Future<Either<ResponseCode, RFCResponse>> getRFC() async {
     try {
       var url = NetworkCallMethods.rfmAnalysis;
-      var result = await dio.post(url, data: model.toJson());
+      var result = await dio.post(url);
       logger.d("url: $url");
       logger.d("response: ${result.data}");
       final response = BaseResponse.fromJson(result.data);

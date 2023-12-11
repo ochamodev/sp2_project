@@ -5,14 +5,17 @@ part 'rfc_response.g.dart';
 
 @JsonSerializable()
 class RFCResponse {
-  final Map<String, List<RFCItemResponse>> premium;
-  final Map<String, List<RFCItemResponse>> potential;
-  final Map<String, List<RFCItemResponse>> sporadic;
+
+  final double avgFrequency;
+  final double avgMonetary;
+  final double avgRecency;
+  final Map<String, List<RFCItemResponse>> customerClusters;
 
   RFCResponse({
-    required this.premium,
-    required this.potential,
-    required this.sporadic,
+    required this.avgFrequency,
+    required this.avgMonetary,
+    required this.avgRecency,
+    required this.customerClusters,
   });
 
   factory RFCResponse.fromJson(Map<String, dynamic> json) =>

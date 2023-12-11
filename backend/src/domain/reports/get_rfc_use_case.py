@@ -21,22 +21,12 @@ from sklearn.cluster import KMeans
 def get_rfc_analysis_use_case(company_code: int):
     try:
         # Fetch and analyze RFC data
-        rfc_data = rfc(company_code)
-
-        # Create RFCDTO
-        rfc_dto = RFCDTO(
-            premium=rfc_data["premium"],
-            potential=rfc_data["potential"],
-            sporadic=rfc_data["sporadic"]
-        )
-
-        # Create a BaseResponseDTO and return
-        base_response_dto = BaseResponseDTO(data=rfc_dto, success=True)
+        base_response_dto = rfc(company_code)
         return base_response_dto
 
     except Exception as e:
         # Handle exceptions appropriately
-        return BaseResponseDTO(data=None, success=False, message=str(e))
+        return BaseResponseDTO(data=None, success=False)
 
 def rfc(companyCode: int):
     connection = db.engine.raw_connection()
@@ -56,20 +46,45 @@ def rfc(companyCode: int):
 
         cluster_data = get_cluster_data(df=df)
         cluster_items = get_cluster_data_items(cluster_data=cluster_data)
-        
-        premium = [item for item in cluster_items if item.cluster_name.strip() == 'Cliente Premium']
-        potential = [item for item in cluster_items if item.cluster_name.strip() == 'Cliente Potencial']
-        sporadic = [item for item in cluster_items if item.cluster_name.strip() == 'Cliente Esporádico']
+        cluster_list = get_cluster_list(cluster_items)
 
-        return {
-            "premium": premium,
-            "potential": potential,
-            "sporadic": sporadic
-        }
+        avg_rec = cluster_avg_rec(cluster_data)
+        avg_freq = cluster_avg_freq(cluster_data)
+        avg_monetary = cluster_avg_monetary(cluster_data)
+
+        dto = RFCDTO(avgFrequency=avg_freq, avgRecency=avg_rec, avgMonetary=avg_monetary, customerClusters=cluster_list)
+        baseResponseDto = BaseResponseDTO(data=dto, success=True)
+        return baseResponseDto
 
     finally:
         cursor.close()  
         connection.close()
+
+
+def cluster_avg_rec(cluster_data):
+    cluster_avg_rec = cluster_data['recency'].mean()
+    return cluster_avg_rec
+
+def cluster_avg_freq(cluster_data):
+    cluster_avg_freq = cluster_data['frequency'].mean()
+    return cluster_avg_freq
+
+def cluster_avg_monetary(cluster_data):
+    cluster_avg_monetary = cluster_data['monetary'].mean()
+    return cluster_avg_monetary
+
+
+def get_cluster_list(cluster_items):
+    premium = [item for item in cluster_items if item.clusterName.strip() == 'Cliente Premium']
+    potential = [item for item in cluster_items if item.clusterName.strip() == 'Cliente Potencial']
+    sporadic = [item for item in cluster_items if item.clusterName.strip() == 'Cliente Esporádico']
+
+    return {
+            "premium": premium,
+            "potential": potential,
+            "sporadic": sporadic
+            }
+
 
 
 def get_cluster_data_items(cluster_data):
@@ -95,8 +110,8 @@ def get_cluster_data_items(cluster_data):
             cluster_name_index = cluster_data.columns.get_loc('cluster_name')
             cluster_name = item[cluster_name_index]
             dto = RFCItemDTO(idReceptor=idReceptor, name=name,  
-                                rfm_score=rfm_score, recency=recency, frequency=frequency, monetary=monetary, 
-                                cluster=cluster, cluster_name=cluster_name)
+                                rfmScore=rfm_score, recency=recency, frequency=frequency, monetary=monetary, 
+                                cluster=cluster, clusterName=cluster_name)
             # dto = RFCItemDTO(idReceptor=idReceptor, name=name, amount=amount, 
             #                     rfm_score=rfm_score, recency=recency, frequency=frequency, monetary=monetary, 
             #                     cluster=cluster, cluster_name=cluster_name)
@@ -171,6 +186,7 @@ def get_cluster_data(df):
 
     # obtain tuples for recency, frequency and monetary for each cluster
     cluster_summary = rfm.groupby('cluster')[['recency', 'monetary', 'frequency', 'rfm_score']].mean()
+    print(cluster_summary)
     sorted_clusters = cluster_summary.sort_values('rfm_score').index
 
 
