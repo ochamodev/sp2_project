@@ -10,6 +10,7 @@ import 'package:frontend_sp2/data/customer_retention_caller.dart';
 import 'package:frontend_sp2/data/file_upload_caller.dart';
 import 'package:frontend_sp2/data/get_companies_caller.dart';
 import 'package:frontend_sp2/data/year_filter_api_caller.dart';
+import 'package:frontend_sp2/data/rfc_caller.dart';
 import 'package:frontend_sp2/domain/customer_lifetime_value_use_case.dart';
 import 'package:frontend_sp2/domain/file_upload_use_case.dart';
 import 'package:frontend_sp2/domain/get_companies_use_case.dart';
@@ -25,6 +26,7 @@ import 'package:frontend_sp2/ui/feature/menu/state/customer_lifetime_value_cubit
 import 'package:frontend_sp2/ui/feature/menu/state/file_upload_cubit.dart';
 import 'package:frontend_sp2/ui/feature/register/state/register_user_cubit.dart';
 import 'package:frontend_sp2/ui/feature/select_company/state/select_company_cubit.dart';
+import 'package:frontend_sp2/domain/rfc_use_case.dart';
 import 'package:get_it/get_it.dart';
 import 'package:logger/logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -33,6 +35,7 @@ import '../../data/sales_performance_caller.dart';
 import '../../domain/customer_retention_use_case.dart';
 import '../../ui/feature/menu/state/customer_retention_cubit.dart';
 import '../../ui/feature/menu/state/sales_performance_cubit.dart';
+import '../../ui/feature/menu/state/rfc_cubit.dart';
 
 final getIt = GetIt.instance;
 
@@ -57,6 +60,7 @@ Future<void> initializeInjectedDependencies() async {
   getIt.registerSingleton(CustomerLifetimeValueCaller(dio: getIt(), logger: getIt()));
   getIt.registerSingleton(CustomerRetentionCaller(dio: getIt(), logger: getIt()));
   getIt.registerSingleton(GetCompaniesCaller(dio: getIt(), logger: getIt()));
+  getIt.registerSingleton(RFCCaller(dio: getIt(), logger: getIt()));
   // use cases
   getIt.registerSingleton(LoginUseCase(getIt()));
   getIt.registerSingleton(GetCurrentCompanyUseCase(getIt()));
@@ -67,6 +71,7 @@ Future<void> initializeInjectedDependencies() async {
   getIt.registerSingleton(SalesPerformanceUseCase(getIt(), getIt()));
   getIt.registerSingleton(CustomerLifetimeValueUseCase(getIt(), getIt(), getIt(), getIt()));
   getIt.registerSingleton(CustomerRetentionUseCase(getIt(), getIt(), getIt(), getIt()));
+  getIt.registerSingleton(RFCUseCase(getIt(), getIt(), getIt()));
   getIt.registerSingleton(GetCompaniesUseCase(getIt()));
   // blocs factories
   getIt.registerFactory(() => LoginCubit(getIt(), getIt()));
@@ -76,6 +81,7 @@ Future<void> initializeInjectedDependencies() async {
   getIt.registerFactory(() => SalesPerformanceCubit(getIt(), getIt()));
   getIt.registerFactory(() => CustomerLifetimeValueCubit(getIt(), getIt()));
   getIt.registerFactory(() => CustomerRetentionCubit(getIt(), getIt()));
+  getIt.registerFactory(() => RFCCubit(getIt(), getIt()));
   getIt.registerFactory(() => SelectCompanyCubit(getIt(), getIt()));
   // guards
   getIt.registerSingleton(MainMenuGuard(getIt()));
