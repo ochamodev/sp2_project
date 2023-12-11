@@ -42,12 +42,14 @@ CREATE TABLE IF NOT EXISTS PlatformUser(
     PRIMARY KEY (idUser)
 );
 
+DROP TABLE EmitterPlatformUser;
+
 CREATE TABLE IF NOT EXISTS EmitterPlatformUser(
     idUser INT,
     nitEmitter INT,
     PRIMARY KEY (idUser, nitEmitter),
     FOREIGN KEY(idUser)
-      REFERENCES EmitterDTE(idEmitterDte)
+      REFERENCES platformuser(idUser)
       ON DELETE CASCADE,
     FOREIGN KEY(nitEmitter)
       REFERENCES EmitterDTE(idEmitterDte)
